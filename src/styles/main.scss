@@ -1,0 +1,14 @@
+@import "./reset";
+@import "./settings.variables";
+@import "./modal-timer";
+@import "./side-nav";
+
+
+#{$root-class}__main__content{
+  display: flex;
+  height: 100vh;
+
+  >*{
+    flex: 1 1;
+  }
+}

@@ -1,0 +1,15 @@
+
+#{$root-class}__side__nav{
+  display: flex;
+  background-color: $black-100;
+  color: $white;
+
+  &__controll{
+    flex:1 1;
+   }
+
+  &__content{
+    flex:7 1;
+    border-left: 2px solid $gray-200;
+  }
+}
