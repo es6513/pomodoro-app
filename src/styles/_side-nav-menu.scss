@@ -5,7 +5,18 @@ $_side-nav__menu: #{$_side-nav}__menu;
 
 #{$_side-nav__menu}{
 
-  &-item:hover{
-    background-color:$gray-200;
+  &-item{
+
+    &:hover{
+      background-color:$gray-200;
+    }
+    
+  }
+
+  &-item__active{
+    .st1{
+      fill:$tomato;
+    }
   }
 }
+

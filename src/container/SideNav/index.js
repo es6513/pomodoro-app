@@ -6,6 +6,9 @@ import NewTask from "./views/NewTask";
 import TaskLists from "./views/TaskLists";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Icons from "./icons";
+import { ReactComponent as AddWhite } from "../../assets/icons/add_white.svg";
+import { ReactComponent as ListWhite } from "../../assets/icons/list_white.svg";
+
 import { config } from "../../config";
 const { css } = config;
 const { ROOT_CLASS } = css;
@@ -13,12 +16,12 @@ const { ROOT_CLASS } = css;
 const slideNavs = [
   {
     path: "/add",
-    iconSrc: Icons.AddWhite,
+    iconComponent: AddWhite,
     component: NewTask,
   },
   {
     path: "/todo",
-    iconSrc: Icons.ListWhite,
+    iconComponent: ListWhite,
     component: TaskLists,
   },
 ];
@@ -49,11 +52,17 @@ function SideNav() {
         <NavMenu className={`${ROOT_CLASS}__side-nav__menu`}>
           {slideNavs.map((nav) => (
             <NavItem
-              className={`${ROOT_CLASS}__side-nav__menu-item`}
               to={nav.path}
+              className={`${ROOT_CLASS}__side-nav__menu-item`}
+              activeClassName={`${ROOT_CLASS}__side-nav__menu-item__active`}
+              handelCLick={() =>
+                setIsCollapsed((prevCollapsed) =>
+                  prevCollapsed ? !prevCollapsed : prevCollapsed
+                )
+              }
               key={nav.path}
             >
-              <img src={nav.iconSrc} alt={nav.path}></img>
+              <nav.iconComponent />
             </NavItem>
           ))}
         </NavMenu>
