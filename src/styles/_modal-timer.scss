@@ -1,4 +1,11 @@
 
-#{$root-class}__modal__timer{
-  background-color: $gray-100;
+
+$_modal-timer: #{$root-class}__modal-timer;
+
+#{$root-class}{
+ 
+  #{$_modal-timer}{
+    flex: auto;
+    background-color: $gray-100;
+  }
 }

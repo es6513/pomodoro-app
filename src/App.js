@@ -10,7 +10,7 @@ const { ROOT_CLASS } = css;
 
 function App() {
   return (
-    <div className={`${ROOT_CLASS}__main__content`}>
+    <div className={`${ROOT_CLASS}`}>
       <ModalTimer />
       <SideNav />
     </div>

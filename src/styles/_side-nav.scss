@@ -1,15 +1,42 @@
 
-#{$root-class}__side__nav{
-  display: flex;
-  background-color: $black-100;
-  color: $white;
 
-  &__controll{
-    flex:1 1;
-   }
+$_side-nav: #{$root-class}__side-nav;
 
-  &__content{
-    flex:7 1;
-    border-left: 2px solid $gray-200;
+$_side-nav__collapse: #{$_side-nav}__collapse;
+
+
+#{$root-class}{
+
+  #{$_side-nav}{
+    width: 700px;
+    display: flex;
+    background-color: $black-100;
+    color: $white;
+    position: relative;
+    transition: width 0.5s;
+    &__controll{
+      width: 90px;
+      flex-shrink: 0;
+     }
+  
+    &__content{
+      width: 100%;
+      border-left: 2px solid $gray-200;
+    }
+  
+    &__toggle-collapse{
+      position: absolute;
+      left: -1em;
+      bottom: 5em;
+    }
+  }
+ 
+  #{$_side-nav__collapse}{
+    width: 90px;
+    & #{$_side-nav}__content{
+      overflow-y: hidden;
+      visibility: hidden;
+      opacity: 0;
+    }
   }
 }

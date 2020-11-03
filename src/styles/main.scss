@@ -4,11 +4,8 @@
 @import "./side-nav";
 
 
-#{$root-class}__main__content{
+#{$root-class}{
   display: flex;
   height: 100vh;
-
-  >*{
-    flex: 1 1;
-  }
+  overflow-x:hidden;
 }
