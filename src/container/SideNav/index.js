@@ -1,13 +1,27 @@
 import React, { useState } from "react";
 import classNames from "classnames";
+import NavMenu from "../../components/NavMenu";
+import NavItem from "../../components/NavItem";
 import NewTask from "./views/NewTask";
 import TaskLists from "./views/TaskLists";
-import NavItem from "../../components/NavItem";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Icons from "./icons";
 import { config } from "../../config";
-
 const { css } = config;
 const { ROOT_CLASS } = css;
+
+const slideNavs = [
+  {
+    path: "/add",
+    iconSrc: Icons.AddWhite,
+    component: NewTask,
+  },
+  {
+    path: "/todo",
+    iconSrc: Icons.ListWhite,
+    component: TaskLists,
+  },
+];
 
 function SideNav() {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -23,22 +37,32 @@ function SideNav() {
         onClick={() => setIsCollapsed((prevCollapsed) => !prevCollapsed)}
         className={`${ROOT_CLASS}__side-nav__toggle-collapse`}
       >
-        Click
+        <img src={Icons.TomatoColor} alt="arrow" />
+        <img
+          src={Icons.Arrow}
+          alt="arrow"
+          className={`${ROOT_CLASS}__side-nav__arrow`}
+          width="20px"
+        />
       </button>
       <Router>
-        <ul className={`${ROOT_CLASS}__side-nav__controll`}>
-          <NavItem to="/add" />
-          <NavItem to="/todo" />
-        </ul>
+        <NavMenu className={`${ROOT_CLASS}__side-nav__menu`}>
+          {slideNavs.map((nav) => (
+            <NavItem
+              className={`${ROOT_CLASS}__side-nav__menu-item`}
+              to={nav.path}
+              key={nav.path}
+            >
+              <img src={nav.iconSrc} alt={nav.path}></img>
+            </NavItem>
+          ))}
+        </NavMenu>
 
         <div className={`${ROOT_CLASS}__side-nav__content`}>
           <Switch>
-            <Route path="/add">
-              <NewTask />
-            </Route>
-            <Route path="/todo">
-              <TaskLists />
-            </Route>
+            {slideNavs.map((nav) => (
+              <Route key={nav.path} path={nav.path} component={nav.component} />
+            ))}
           </Switch>
         </div>
       </Router>

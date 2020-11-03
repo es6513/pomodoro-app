@@ -14,7 +14,7 @@ $_side-nav__collapse: #{$_side-nav}__collapse;
     color: $white;
     position: relative;
     transition: width 0.5s;
-    &__controll{
+    &__menu{
       width: 90px;
       flex-shrink: 0;
      }
@@ -25,9 +25,19 @@ $_side-nav__collapse: #{$_side-nav}__collapse;
     }
   
     &__toggle-collapse{
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
       position: absolute;
-      left: -1em;
-      bottom: 5em;
+      width: 5.5rem;
+      height: 3rem;
+      left: -2rem;
+      bottom: 5rem;
+      background-color: $white;
+      border: none;
+      border-radius: 2rem 0.6rem 0.6rem 2rem;
+      outline: none;
+      cursor: pointer;
     }
   }
  
@@ -37,6 +47,10 @@ $_side-nav__collapse: #{$_side-nav}__collapse;
       overflow-y: hidden;
       visibility: hidden;
       opacity: 0;
+    }
+
+    & #{$_side-nav}__arrow{
+      transform: rotate(180deg);
     }
   }
 }

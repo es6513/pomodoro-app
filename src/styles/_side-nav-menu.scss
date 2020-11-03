@@ -1,0 +1,11 @@
+
+$_side-nav: #{$root-class}__side-nav;
+
+$_side-nav__menu: #{$_side-nav}__menu;
+
+#{$_side-nav__menu}{
+
+  &-item:hover{
+    background-color:$gray-200;
+  }
+}
