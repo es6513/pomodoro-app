@@ -4,10 +4,13 @@ import NavMenu from "../../components/NavMenu";
 import NavItem from "../../components/NavItem";
 import NewTask from "./views/NewTask";
 import TaskLists from "./views/TaskLists";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import Icons from "./icons";
-import { ReactComponent as AddWhite } from "../../assets/icons/add_white.svg";
-import { ReactComponent as ListWhite } from "../../assets/icons/list_white.svg";
 
 import { config } from "../../config";
 const { css } = config;
@@ -16,12 +19,12 @@ const { ROOT_CLASS } = css;
 const slideNavs = [
   {
     path: "/add",
-    iconComponent: AddWhite,
+    iconComponent: Icons.AddWhite,
     component: NewTask,
   },
   {
     path: "/todo",
-    iconComponent: ListWhite,
+    iconComponent: Icons.ListWhite,
     component: TaskLists,
   },
 ];
@@ -40,7 +43,7 @@ function SideNav() {
         onClick={() => setIsCollapsed((prevCollapsed) => !prevCollapsed)}
         className={`${ROOT_CLASS}__side-nav__toggle-collapse`}
       >
-        <img src={Icons.TomatoColor} alt="arrow" />
+        <Icons.TomatoColor />
         <img
           src={Icons.Arrow}
           alt="arrow"
@@ -72,6 +75,7 @@ function SideNav() {
             {slideNavs.map((nav) => (
               <Route key={nav.path} path={nav.path} component={nav.component} />
             ))}
+            <Redirect replace to={slideNavs[0].path} />
           </Switch>
         </div>
       </Router>
