@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import classNames from "classnames";
-import NavMenu from "../../components/NavMenu";
-import NavItem from "../../components/NavItem";
+import PanelMenu from "../../components/PanelMenu";
+import MenuItem from "../../components/MenuItem";
+import MenuLink from "../../components/MenuLink";
 import NewTask from "./views/NewTask";
 import TaskLists from "./views/TaskLists";
 import {
@@ -29,7 +30,7 @@ const slideNavs = [
   },
 ];
 
-function SideNav() {
+function AsidePanel() {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const asideClass = classNames({
@@ -52,12 +53,10 @@ function SideNav() {
         />
       </button>
       <Router>
-        <NavMenu className={`${ROOT_CLASS}__side-nav__menu`}>
+        <PanelMenu className={`${ROOT_CLASS}__side-nav__menu`}>
           {slideNavs.map((nav) => (
-            <NavItem
-              to={nav.path}
+            <MenuItem
               className={`${ROOT_CLASS}__side-nav__menu-item`}
-              activeClassName={`${ROOT_CLASS}__side-nav__menu-item__active`}
               handelCLick={() =>
                 setIsCollapsed((prevCollapsed) =>
                   prevCollapsed ? !prevCollapsed : prevCollapsed
@@ -65,10 +64,15 @@ function SideNav() {
               }
               key={nav.path}
             >
-              <nav.iconComponent />
-            </NavItem>
+              <MenuLink
+                to={nav.path}
+                activeClassName={`${ROOT_CLASS}__side-nav__menu-item__active`}
+              >
+                <nav.iconComponent />
+              </MenuLink>
+            </MenuItem>
           ))}
-        </NavMenu>
+        </PanelMenu>
 
         <div className={`${ROOT_CLASS}__side-nav__content`}>
           <Switch>
@@ -83,4 +87,4 @@ function SideNav() {
   );
 }
 
-export default SideNav;
+export default AsidePanel;

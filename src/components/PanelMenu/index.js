@@ -1,17 +1,17 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 
-function NavMenu({ className, children }) {
+function PanelMenu({ className, children }) {
   return <ul className={className}>{children}</ul>;
 }
 
-export default NavMenu;
+export default PanelMenu;
 
-NavMenu.propTypes = {
+PanelMenu.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
 
-NavMenu.defaultProps = {
+PanelMenu.defaultProps = {
   className: "",
 };

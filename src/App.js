@@ -1,6 +1,6 @@
 import React from "react";
 import ModalTimer from "./container/ModalTimer";
-import SideNav from "./container/SideNav";
+import AsidePanel from "./container/AsidePanel";
 import "./styles/main.scss";
 
 import { config } from "./config";
@@ -12,7 +12,7 @@ function App() {
   return (
     <div className={`${ROOT_CLASS}`}>
       <ModalTimer />
-      <SideNav />
+      <AsidePanel />
     </div>
   );
 }
