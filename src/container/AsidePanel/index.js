@@ -31,42 +31,42 @@ const slideNavs = [
 ];
 
 function AsidePanel() {
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const asideClass = classNames({
-    [`${ROOT_CLASS}__side-nav`]: true,
-    [`${ROOT_CLASS}__side-nav__collapse`]: isCollapsed,
+    [`${ROOT_CLASS}__aside-panel`]: true,
+    [`${ROOT_CLASS}__aside-panel__collapse`]: isCollapsed,
   });
 
   return (
     <aside className={asideClass}>
       <button
         onClick={() => setIsCollapsed((prevCollapsed) => !prevCollapsed)}
-        className={`${ROOT_CLASS}__side-nav__toggle-collapse`}
+        className={`${ROOT_CLASS}__aside-panel__toggle-collapse`}
       >
         <Icons.TomatoColor />
         <img
           src={Icons.Arrow}
           alt="arrow"
-          className={`${ROOT_CLASS}__side-nav__arrow`}
+          className={`${ROOT_CLASS}__aside-panel__arrow`}
           width="20px"
         />
       </button>
       <Router>
-        <PanelMenu className={`${ROOT_CLASS}__side-nav__menu`}>
+        <PanelMenu className={`${ROOT_CLASS}__aside-panel__menu`}>
           {slideNavs.map((nav) => (
             <MenuItem
-              className={`${ROOT_CLASS}__side-nav__menu-item`}
+              key={nav.path}
+              className={`${ROOT_CLASS}__aside-panel__menu-item`}
               handelCLick={() =>
                 setIsCollapsed((prevCollapsed) =>
                   prevCollapsed ? !prevCollapsed : prevCollapsed
                 )
               }
-              key={nav.path}
             >
               <MenuLink
                 to={nav.path}
-                activeClassName={`${ROOT_CLASS}__side-nav__menu-item__active`}
+                activeClassName={`${ROOT_CLASS}__aside-panel__menu-item__active`}
               >
                 <nav.iconComponent />
               </MenuLink>
@@ -74,7 +74,7 @@ function AsidePanel() {
           ))}
         </PanelMenu>
 
-        <div className={`${ROOT_CLASS}__side-nav__content`}>
+        <div className={`${ROOT_CLASS}__aside-panel__content`}>
           <Switch>
             {slideNavs.map((nav) => (
               <Route key={nav.path} path={nav.path} component={nav.component} />

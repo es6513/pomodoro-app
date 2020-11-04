@@ -1,9 +1,9 @@
 
-$_side-nav: #{$root-class}__side-nav;
+$_aside-panel: #{$root-class}__aside-panel;
 
-$_side-nav__menu: #{$_side-nav}__menu;
+$_aside-panel__menu: #{$_aside-panel}__menu;
 
-#{$_side-nav__menu}{
+#{$_aside-panel__menu}{
 
   &-item{
 

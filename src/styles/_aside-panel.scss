@@ -1,13 +1,13 @@
 
 
-$_side-nav: #{$root-class}__side-nav;
+$_aside-panel: #{$root-class}__aside-panel;
 
-$_side-nav__collapse: #{$_side-nav}__collapse;
+$_aside-panel__collapse: #{$_aside-panel}__collapse;
 
 
 #{$root-class}{
 
-  #{$_side-nav}{
+  #{$_aside-panel}{
     width: 700px;
     display: flex;
     background-color: $black-100;
@@ -42,15 +42,15 @@ $_side-nav__collapse: #{$_side-nav}__collapse;
     }
   }
  
-  #{$_side-nav__collapse}{
+  #{$_aside-panel__collapse}{
     width: 90px;
-    & #{$_side-nav}__content{
+    & #{$_aside-panel}__content{
       overflow-y: hidden;
       visibility: hidden;
       opacity: 0;
     }
 
-    & #{$_side-nav}__arrow{
+    & #{$_aside-panel}__arrow{
       transform: rotate(180deg);
     }
   }

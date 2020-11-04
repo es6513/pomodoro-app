@@ -1,13 +1,15 @@
 @import "./reset";
 @import "./settings.variables";
 @import "./modal-timer";
-@import "./side-nav";
+@import "./aside-panel";
 @import "./modal-timer";
 @import "./side-nav-menu";
+
 
 
 #{$root-class}{
   display: flex;
   height: 100vh;
   overflow-x:hidden;
+  font-family: Lato, Microsoft JhengHe, sans-serif;
 }
