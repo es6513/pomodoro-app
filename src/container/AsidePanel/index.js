@@ -11,7 +11,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import Icons from "./icons";
+import Icons from "../../components/Icon";
 
 import { config } from "../../config";
 const { css } = config;

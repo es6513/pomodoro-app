@@ -3,7 +3,9 @@
 @import "./modal-timer";
 @import "./aside-panel";
 @import "./modal-timer";
-@import "./side-nav-menu";
+@import "./aside-panel-menu";
+@import "./aside-panel-layouts";
+@import "./aside-panel-new-task";
 
 
 
@@ -12,4 +14,8 @@
   height: 100vh;
   overflow-x:hidden;
   font-family: Lato, Microsoft JhengHe, sans-serif;
+  
+ *{
+   box-sizing: border-box;
+ }
 }

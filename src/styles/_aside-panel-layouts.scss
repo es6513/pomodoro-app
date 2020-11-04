@@ -1,0 +1,19 @@
+
+$_aside-panel: #{$root-class}__aside-panel;
+
+$_aside-panel__layout: #{$_aside-panel}__layout;
+
+#{$_aside-panel__layout} {
+  padding: 2 * $font-basis 2 * $font-basis;
+
+  h1{
+    line-height: 1.5;
+    letter-spacing: 0.3 * $font-basis;
+    font-size: 1.2 * $font-basis;
+    font-weight: bold;
+    border-bottom: 1px solid $gray-200;
+    padding-bottom: 1.2 * $font-basis;
+    margin-bottom: 1.2 * $font-basis;
+  }
+
+}

@@ -10,10 +10,10 @@ function button({ handleClick }) {
   return (
     <button
       onClick={() => handleClick}
-      className={`${ROOT_CLASS}__side-nav__toggle-collapse`}
+      className={`${ROOT_CLASS}__aside-panel__toggle-collapse`}
     >
       <TomatoColor />
-      <Arrow width="1.5rem" className={`${ROOT_CLASS}__side-nav__arrow`} />
+      <Arrow width="1.5rem" className={`${ROOT_CLASS}__aside-panel__arrow`} />
     </button>
   );
 }

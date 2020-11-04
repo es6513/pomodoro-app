@@ -14,5 +14,5 @@ MenuItem.propTypes = {
 
 MenuItem.defaultProps = {
   className: "",
-  handelCLick: () => {},
+  handelCLick: () => null,
 };

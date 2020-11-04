@@ -29,13 +29,13 @@ $_aside-panel__collapse: #{$_aside-panel}__collapse;
       align-items: center;
       justify-content: space-around;
       position: absolute;
-      width: 5.5rem;
-      height: 3rem;
-      left: -2rem;
-      bottom: 5rem;
+      width: 5.5 * $font-basis;
+      height: 3 * $font-basis;
+      left: -2 * $font-basis;
+      bottom: 5 * $font-basis;
       background-color: $white;
       border: none;
-      border-radius: 2rem 0.6rem 0.6rem 2rem;
+      border-radius: 2 * $font-basis 0.6 * $font-basis 0.6 * $font-basis 2 * $font-basis;
       outline: none;
       cursor: pointer;
 
