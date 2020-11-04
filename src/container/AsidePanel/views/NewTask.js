@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import classNames from "classnames";
-
 import { config } from "../../../config";
 import HeadTitle from "../../../components/HeadTitle";
 import withAsideLayout from "../../../hoc/withAsideLayout";
 import useInput from "../../../hooks/useInput";
 import Tomato from "../../../components/Tomato";
+import Input from "../../../components/Input";
 
 const { css } = config;
 const { ROOT_CLASS } = css;
 
 function NewTask() {
-  const [bindingProps, initializeTodoText] = useInput("");
+  const [bindingInputProps, initializeTodoInput] = useInput("");
   const [hoverRate, setHoverRate] = useState(1);
   const [estimateRate, setEstimateRate] = useState(1);
 
@@ -35,7 +35,7 @@ function NewTask() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    initializeTodoText();
+    initializeTodoInput();
   };
   return (
     <div className={`${ROOT_CLASS}__aside-panel__new-task`}>
@@ -45,19 +45,15 @@ function NewTask() {
           <label htmlFor="todoItem" className={`${ROOT_CLASS}__form-label`}>
             TASK TITLE
           </label>
-          <input
+          <Input
             className={`${ROOT_CLASS}__form-input`}
             name="todoItem"
-            type="text"
-            {...bindingProps}
+            {...bindingInputProps}
           />
         </div>
         <div className={`${ROOT_CLASS}__form-group`}>
-          <label
-            htmlFor="estimateTomato"
-            className={`${ROOT_CLASS}__form-label`}
-          >
-            ESTIMATED TOMOTO
+          <label className={`${ROOT_CLASS}__form-label`}>
+            ESTIMATED TOMATO
           </label>
           <div
             className={`${ROOT_CLASS}__form-rate-group`}
