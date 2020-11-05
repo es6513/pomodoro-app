@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import classNames from "classnames";
 import { config } from "../../../config";
 import HeadTitle from "../../../components/HeadTitle";
@@ -7,13 +7,11 @@ import useInput from "../../../hooks/useInput";
 import Tomato from "../../../components/Tomato";
 import Input from "../../../components/Input";
 import { useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 
 const { css } = config;
 const { ROOT_CLASS } = css;
 
 function NewTask() {
-  const [bindingInputProps, initializeTodoInput] = useInput("");
   const [hoverRate, setHoverRate] = useState(1);
   const [estimateRate, setEstimateRate] = useState(1);
   const {
@@ -22,14 +20,14 @@ function NewTask() {
     formState,
     handleSubmit,
   } = useForm({
-    mode: "onBlur",
+    mode: "all",
     criteriaMode: "all",
   });
 
   const { isValid } = formState;
 
-  const onSubmit = () => {
-    initializeTodoInput();
+  const onSubmit = (data, e) => {
+    e.target.reset();
   };
   const handleTomatoClass = (index) => {
     const activeCondition = index + 1 <= hoverRate || index + 1 <= estimateRate;
@@ -52,7 +50,6 @@ function NewTask() {
   const handleHoverRate = (value) => {
     setHoverRate(value);
   };
-  console.log(formErrors);
   return (
     <div className={`${ROOT_CLASS}__aside-panel__new-task`}>
       <HeadTitle>ADD NEW TASK</HeadTitle>
@@ -68,7 +65,6 @@ function NewTask() {
               required: "This field is required.",
             })}
             errors={formErrors}
-            {...bindingInputProps}
           />
         </div>
         <div className={`${ROOT_CLASS}__form-group`}>

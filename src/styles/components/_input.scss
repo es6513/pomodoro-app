@@ -14,5 +14,7 @@ input {
 
   +.error-message{
     color:red;
+    position: absolute;
+    bottom: -1*$font-basis;
   }
 }

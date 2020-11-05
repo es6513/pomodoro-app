@@ -9,6 +9,7 @@ $_aside-panel__new-task: #{$_aside-panel}__new-task;
     display: flex;
     flex-direction: column;
     margin-bottom: 1.8 * $font-basis;
+    position: relative;
   }
 
   #{$root-class}__form-label{
@@ -21,23 +22,26 @@ $_aside-panel__new-task: #{$_aside-panel}__new-task;
   #{$root-class}__form-submit-button{
     width: 100%;
     height: 3 * $font-basis;
+    color: $white;
+    background-color: $tomato;
     outline: none;
     font-weight: 800;
-    color: $gray-400;
     border-color: transparent;
-    background-color: $gray-300;
     border-radius: 1.5 * $font-basis;
     cursor: pointer;
   }
 
   
   #{$root-class}__form-submit-button:disabled{
+    color: $gray-400;
+    background-color: $gray-300;
     cursor: not-allowed;
   }
 
   #{$root-class}__form-rate-group{
     display: flex;
     justify-content: space-between;
+    
   }
 
   #{$root-class}__form-rate-tomato{
