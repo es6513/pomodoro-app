@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import classNames from "classnames";
+import React from "react";
 import { config } from "../../../config";
 import HeadTitle from "../../../components/HeadTitle";
 import withAsideLayout from "../../../hoc/withAsideLayout";
-import Tomato from "../../../components/Tomato";
+import TomatoRate from "../../../components/TomatoRate";
 import Input from "../../../components/Input";
+import Button from "../../../components/Button";
 import { useForm, Controller } from "react-hook-form";
 
 const { css } = config;
@@ -20,7 +20,6 @@ const defaultValues = {
 };
 
 function NewTask() {
-  const [hoverRate, setHoverRate] = useState(1);
   const {
     register: formRegister,
     errors: formErrors,
@@ -40,23 +39,7 @@ function NewTask() {
     console.log(data);
     reset(defaultValues);
   };
-  const handleTomatoClass = (index, estimateRate) => {
-    const activeCondition = index + 1 <= hoverRate || index + 1 <= estimateRate;
-    const tomatoRateClass = classNames({
-      [`${ROOT_CLASS}__form-rate-tomato`]: !activeCondition,
-      [`${ROOT_CLASS}__form-rate-tomato__active`]: activeCondition,
-    });
 
-    return tomatoRateClass;
-  };
-
-  const submitButtonClassName = classNames({
-    [`${ROOT_CLASS}__form-submit-button`]: true,
-  });
-
-  const handleHoverRate = (value) => {
-    setHoverRate(value);
-  };
   return (
     <div className={`${ROOT_CLASS}__aside-panel__new-task`}>
       <HeadTitle>ADD NEW TASK</HeadTitle>
@@ -78,35 +61,21 @@ function NewTask() {
           <label className={`${ROOT_CLASS}__form-label`}>
             ESTIMATED TOMATO
           </label>
-          <div
-            className={`${ROOT_CLASS}__form-rate-group`}
-            onMouseLeave={() => handleHoverRate(1)}
-          >
-            <Controller
-              control={control}
-              name="estimatedTomato"
-              render={({ onChange, value }) =>
-                new Array(10)
-                  .fill()
-                  .map((el, index) => (
-                    <Tomato
-                      key={index}
-                      className={handleTomatoClass(index, value)}
-                      handleClick={() => onChange(index + 1)}
-                      handleMouseOver={() => handleHoverRate(index + 1)}
-                    />
-                  ))
-              }
-            />
-          </div>
+          <Controller
+            control={control}
+            name="estimatedTomato"
+            render={({ onChange, value }) => (
+              <TomatoRate handleClick={onChange} estimateRate={value} />
+            )}
+          />
         </div>
-        <button
-          className={submitButtonClassName}
-          disabled={!formIsValid}
+        <Button
+          className={`${ROOT_CLASS}__form-submit-button`}
           type="submit"
+          disabled={!formIsValid}
         >
           ADD TASK
-        </button>
+        </Button>
       </form>
     </div>
   );

@@ -19,25 +19,7 @@ $_aside-panel__new-task: #{$_aside-panel}__new-task;
     margin-bottom: 0.8 * $font-basis;
   }
 
-  #{$root-class}__form-submit-button{
-    width: 100%;
-    height: 3 * $font-basis;
-    color: $white;
-    background-color: $tomato;
-    outline: none;
-    font-weight: 800;
-    border-color: transparent;
-    border-radius: 1.5 * $font-basis;
-    cursor: pointer;
-  }
-
   
-  #{$root-class}__form-submit-button:disabled{
-    color: $gray-400;
-    background-color: $gray-300;
-    cursor: not-allowed;
-  }
-
   #{$root-class}__form-rate-group{
     display: flex;
     justify-content: space-between;

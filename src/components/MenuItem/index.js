@@ -1,8 +1,8 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 
-function MenuItem({ className, handelCLick, ...props }) {
-  return <li className={className} onClick={handelCLick} {...props}></li>;
+function MenuItem({ className, handelCLick, ...restProps }) {
+  return <li className={className} onClick={handelCLick} {...restProps}></li>;
 }
 
 export default MenuItem;

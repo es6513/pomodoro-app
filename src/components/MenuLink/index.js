@@ -2,8 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { PropTypes } from "prop-types";
 
-function MenuLink({ to, activeClassName, ...props }) {
-  return <NavLink to={to} activeClassName={activeClassName} {...props} />;
+function MenuLink({ to, activeClassName, ...restProps }) {
+  return <NavLink to={to} activeClassName={activeClassName} {...restProps} />;
 }
 
 export default MenuLink;
