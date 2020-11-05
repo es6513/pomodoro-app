@@ -1,10 +1,16 @@
 import React from "react";
 import { PropTypes } from "prop-types";
+import classNames from "classnames/bind";
 
 function Input({ inputName, className, ...restProps }) {
   return (
     <>
-      <input name="todoItem" type="text" className={className} {...restProps} />
+      <input
+        name="todoItem"
+        type="text"
+        className={classNames}
+        {...restProps}
+      />
     </>
   );
 }

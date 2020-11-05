@@ -1,0 +1,14 @@
+
+input {
+  height: 3 * $font-basis;
+  outline: none;
+  border: 0.15rem solid transparent;
+  font-size: 1.2 * $font-basis;
+  font-family: inherit;
+  padding: 0.8 * $font-basis;
+  border-radius: 0.5 * $font-basis;
+
+  &:focus{
+    border-color: $tomato;
+  }
+}
