@@ -31,7 +31,7 @@ function NewTask() {
   } = useForm({
     mode: "all",
     criteriaMode: "all",
-    ...defaultValues,
+    defaultValues,
   });
 
   const { isValid: formIsValid } = formState;
