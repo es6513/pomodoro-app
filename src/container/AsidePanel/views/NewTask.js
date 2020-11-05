@@ -3,33 +3,44 @@ import classNames from "classnames";
 import { config } from "../../../config";
 import HeadTitle from "../../../components/HeadTitle";
 import withAsideLayout from "../../../hoc/withAsideLayout";
-import useInput from "../../../hooks/useInput";
 import Tomato from "../../../components/Tomato";
 import Input from "../../../components/Input";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 
 const { css } = config;
 const { ROOT_CLASS } = css;
 
+const defaultValues = {
+  id: "",
+  taskTitle: "",
+  estimatedTomato: 1,
+  isArchived: false,
+  isDone: false,
+  isBreak: false,
+};
+
 function NewTask() {
   const [hoverRate, setHoverRate] = useState(1);
-  const [estimateRate, setEstimateRate] = useState(1);
   const {
     register: formRegister,
     errors: formErrors,
     formState,
+    control,
+    reset,
     handleSubmit,
   } = useForm({
     mode: "all",
     criteriaMode: "all",
+    ...defaultValues,
   });
 
-  const { isValid } = formState;
+  const { isValid: formIsValid } = formState;
 
   const onSubmit = (data, e) => {
-    e.target.reset();
+    console.log(data);
+    reset(defaultValues);
   };
-  const handleTomatoClass = (index) => {
+  const handleTomatoClass = (index, estimateRate) => {
     const activeCondition = index + 1 <= hoverRate || index + 1 <= estimateRate;
     const tomatoRateClass = classNames({
       [`${ROOT_CLASS}__form-rate-tomato`]: !activeCondition,
@@ -43,10 +54,6 @@ function NewTask() {
     [`${ROOT_CLASS}__form-submit-button`]: true,
   });
 
-  const handleEstimateRate = (value) => {
-    setEstimateRate(value);
-  };
-
   const handleHoverRate = (value) => {
     setHoverRate(value);
   };
@@ -55,12 +62,12 @@ function NewTask() {
       <HeadTitle>ADD NEW TASK</HeadTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={`${ROOT_CLASS}__form-group`}>
-          <label htmlFor="todoItem" className={`${ROOT_CLASS}__form-label`}>
+          <label htmlFor="taskTitle" className={`${ROOT_CLASS}__form-label`}>
             TASK TITLE
           </label>
           <Input
             className={`${ROOT_CLASS}__form-input`}
-            inputName="todoItem"
+            inputName="taskTitle"
             useFormRef={formRegister({
               required: "This field is required.",
             })}
@@ -75,20 +82,27 @@ function NewTask() {
             className={`${ROOT_CLASS}__form-rate-group`}
             onMouseLeave={() => handleHoverRate(1)}
           >
-            {new Array(10).fill().map((el, index) => (
-              <Tomato
-                key={index}
-                className={handleTomatoClass(index)}
-                handleClick={() => handleEstimateRate(index + 1)}
-                handleMouseOver={() => handleHoverRate(index + 1)}
-              />
-            ))}
+            <Controller
+              control={control}
+              name="estimatedTomato"
+              render={({ onChange, value }) =>
+                new Array(10)
+                  .fill()
+                  .map((el, index) => (
+                    <Tomato
+                      key={index}
+                      className={handleTomatoClass(index, value)}
+                      handleClick={() => onChange(index + 1)}
+                      handleMouseOver={() => handleHoverRate(index + 1)}
+                    />
+                  ))
+              }
+            />
           </div>
         </div>
-
         <button
           className={submitButtonClassName}
-          disabled={!isValid}
+          disabled={!formIsValid}
           type="submit"
         >
           ADD TASK
