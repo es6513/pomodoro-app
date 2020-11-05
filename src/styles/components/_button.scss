@@ -1,3 +1,29 @@
+
+
+
 button {
-  
+  outline: none;
+  font-weight: 800;
+  border-color: transparent;
+  cursor: pointer;
+
+  &#{$root-class}__form-submit-button{
+    width: 100%;
+    height: 3 * $font-basis;
+    color: $white;
+    background-color: $tomato;
+    border-radius: 1.5 * $font-basis;
+  }
+
+
+  &#{$root-class}__form-submit-button:disabled{
+    color: $gray-400;
+    background-color: $gray-300;
+    cursor: not-allowed;
+  }
+
+  &#{$root-class}__button-circle{
+    border-radius: 50%;
+  }
 }
+

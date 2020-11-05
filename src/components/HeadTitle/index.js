@@ -1,8 +1,8 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 
-function HeadTitle({ children, ...props }) {
-  return <h1 {...props}>{children}</h1>;
+function HeadTitle({ children, ...restProps }) {
+  return <h1 {...restProps}>{children}</h1>;
 }
 
 HeadTitle.propTypes = {
