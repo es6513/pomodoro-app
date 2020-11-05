@@ -11,4 +11,8 @@ input {
   &:focus{
     border-color: $tomato;
   }
+
+  +.error-message{
+    color:red;
+  }
 }

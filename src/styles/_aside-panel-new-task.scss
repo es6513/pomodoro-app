@@ -30,6 +30,11 @@ $_aside-panel__new-task: #{$_aside-panel}__new-task;
     cursor: pointer;
   }
 
+  
+  #{$root-class}__form-submit-button:disabled{
+    cursor: not-allowed;
+  }
+
   #{$root-class}__form-rate-group{
     display: flex;
     justify-content: space-between;
