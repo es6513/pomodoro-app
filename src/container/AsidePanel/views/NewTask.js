@@ -50,7 +50,7 @@ function NewTask() {
 
   return (
     <div className={`${ROOT_CLASS}__aside-panel__new-task`}>
-      <HeadTitle>ADD NEW TASK</HeadTitle>
+      <HeadTitle headTag="h1">ADD NEW TASK</HeadTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={`${ROOT_CLASS}__form-group`}>
           <label htmlFor="taskTitle" className={`${ROOT_CLASS}__form-label`}>

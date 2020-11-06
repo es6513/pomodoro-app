@@ -1,11 +1,12 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 
-function HeadTitle({ children, ...restProps }) {
-  return <h1 {...restProps}>{children}</h1>;
+function HeadTitle({ headTag, children, ...restProps }) {
+  return React.createElement(headTag, { ...restProps }, children);
 }
 
 HeadTitle.propTypes = {
+  headTag: PropTypes.string.isRequired,
   children: PropTypes.string.isRequired,
 };
 

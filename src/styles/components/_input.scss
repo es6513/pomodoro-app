@@ -2,7 +2,7 @@
 input {
   height: 3 * $font-basis;
   outline: none;
-  border: 0.15rem solid transparent;
+  border: 0.15 * $font-basis solid transparent;
   font-size: 1.2 * $font-basis;
   font-family: inherit;
   padding: 0.8 * $font-basis;
@@ -13,7 +13,7 @@ input {
   }
 
   +.error-message{
-    color:red;
+    color:$invalid;
     position: absolute;
     bottom: -1 * $font-basis;
   }

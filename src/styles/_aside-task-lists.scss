@@ -2,13 +2,38 @@
 
 $_aside-panel: #{$root-class}__aside-panel;
 
-$_aside-panel__task-lists:#{$_aside-panel}__task-lists;
+$_aside-panel__task-lists-wrapper:#{$_aside-panel}__task-lists-wrapper;
 
-#{$_aside-panel__task-lists}{
+#{$_aside-panel__task-lists-wrapper}{
 
   #{$root-class}__task-lists__switch-nav-item{
-    width: 4.5 * $font-basis;
+    width: 5 * $font-basis;
     margin-right:  0.5 * $font-basis;
+  }
+
+  #{$root-class}__task-lists__task-item{
+    height: 80px;
+    background-color: $gray-200;;
+    padding: 1 * $font-basis 2.5 * $font-basis;
+    cursor: pointer;
+    transition: height 0.5s;
+  }
+
+  #{$root-class}__task-lists__task-item-info{
+    height: 80px;
+  }
+
+  #{$root-class}__task-lists__task-item-detail{
+    margin-top:  1 * $font-basis;
+    border-top: 1px solid $black-100;
+    height: 300px;
+    overflow-y: hidden;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  #{$root-class}__form-group{
+    padding-top:  0.8 * $font-basis;
   }
 
 }

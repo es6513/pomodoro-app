@@ -5,8 +5,12 @@ $color-themes:(
     font-color: $white,
     background-color: $tomato
   ),
-  gray:(
+  gray-nav:(
     font-color: $gray-300,
+    background-color: $gray-400
+  ),
+  gray:(
+    font-color: $white,
     background-color: $gray-400
   )
 );
