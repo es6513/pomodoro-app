@@ -1,29 +1,84 @@
 
+//color
+$color-themes:(
+  primary:(
+    font-color: $white,
+    background-color: $tomato
+  ),
+  gray:(
+    font-color: $gray-300,
+    background-color: $gray-400
+  )
+);
 
+//radius
+
+$radius-themes:(
+  general:(
+    radius: 1.5  * $font-basis,
+  ),
+  rounded:(
+    radius: 50%,
+  ),
+  upper:(
+    radius: 0.5  * $font-basis 0.5  * $font-basis 0 0,
+  ),
+);
+
+//size
+
+$size-themes:(
+  big:(
+    height: 3 * $font-basis,
+    font-size: $font-basis 
+  ),
+  small:(
+    height: 1.5 * $font-basis,
+    font-size: 0.5 * $font-basis 
+  )
+);
+
+
+//disabled
+$disabled-font-color: $gray-400;
+$disabled-background-color: $gray-300;
 
 button {
   outline: none;
   font-weight: 800;
+  font-family: inherit;
   border-color: transparent;
   cursor: pointer;
 
-  &#{$root-class}__form-submit-button{
+  @each $color, $styles in $color-themes{
+    &[data-color=#{$color}]{
+      color: map-get($styles , font-color);
+      background-color: map-get($styles , background-color);
+    }
+  }
+
+  @each $radius, $styles in $radius-themes{
+    &[data-radius=#{$radius}]{
+      border-radius: map-get($styles , radius);;
+    }
+  }
+
+  @each $size, $styles in $size-themes{
+    &[data-size=#{$size}]{
+      height: map-get($styles , height);
+      font-size:map-get($styles ,  font-size)
+    }
+  }
+
+  &[data-layout="full"]{
     width: 100%;
-    height: 3 * $font-basis;
-    color: $white;
-    background-color: $tomato;
-    border-radius: 1.5 * $font-basis;
+    display: block;
   }
 
-
-  &#{$root-class}__form-submit-button:disabled{
-    color: $gray-400;
-    background-color: $gray-300;
+  &:disabled{
+    color: $disabled-font-color;
+    background-color: $disabled-background-color;
     cursor: not-allowed;
-  }
-
-  &#{$root-class}__button-circle{
-    border-radius: 50%;
   }
 }
 

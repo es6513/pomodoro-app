@@ -78,7 +78,10 @@ function NewTask() {
           />
         </div>
         <Button
-          className={`${ROOT_CLASS}__form-submit-button`}
+          data-size="big"
+          data-color="primary"
+          data-radius="general"
+          data-layout="full"
           type="submit"
           disabled={!formIsValid}
         >
