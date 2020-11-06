@@ -4,7 +4,9 @@ import { TaskListContext } from "../../../context";
 import { config } from "../../../config";
 import HeadTitle from "../../../components/HeadTitle";
 import Button from "../../../components/Button";
+import TomatoRate from "../../../components/TomatoRate";
 import Input from "../../../components/Input";
+import { useForm, Controller } from "react-hook-form";
 
 import withAsideLayout from "../../../hoc/withAsideLayout";
 
@@ -47,6 +49,24 @@ function TaskLists() {
     },
     taskDispatch,
   } = useContext(TaskListContext);
+
+  const defaultValues = {
+    taskTitle: "",
+    estimatedTomato: 1,
+  };
+
+  const {
+    register: formRegister,
+    errors: formErrors,
+    reset: resetForm,
+    formState,
+    control,
+    handleSubmit,
+  } = useForm({
+    mode: "all",
+    criteriaMode: "all",
+    defaultValues,
+  });
   const [filter, setFilter] = useState(switchNav[0].filter);
   const visibleTask = getVisibleTask(taskLists, filter);
   const [isTaskSpread, setIsTaskSpread] = useState(false);
@@ -108,12 +128,12 @@ function TaskLists() {
             key={el.id}
             className={getTaskItemClassName(index)}
             style={{ marginBottom: "1px" }}
-            onClick={() => {
-              handleSelectTask(el.id, index);
-              handleSpread(index);
-            }}
+            onClick={() => handleSelectTask(el.id, index)}
           >
-            <div className={`${ROOT_CLASS}__task-lists__task-item-info`}>
+            <div
+              className={`${ROOT_CLASS}__task-lists__task-item-info`}
+              onClick={() => handleSpread(index)}
+            >
               <HeadTitle headTag="h4">{el.taskTitle}</HeadTitle>
             </div>
             <div className={`${ROOT_CLASS}__task-lists__task-item-detail`}>
@@ -125,6 +145,27 @@ function TaskLists() {
                   >
                     TASK TITLE
                   </label>
+                  <Input
+                    data-size="small"
+                    className={`${ROOT_CLASS}__form-input`}
+                    inputName="taskTitle"
+                    useFormRef={formRegister({
+                      required: "This field is required.",
+                    })}
+                    errors={formErrors}
+                  />
+                </div>
+                <div className={`${ROOT_CLASS}__form-group`}>
+                  <label className={`${ROOT_CLASS}__form-label`}>
+                    ESTIMATED TOMATO
+                  </label>
+                  <Controller
+                    control={control}
+                    name="estimatedTomato"
+                    render={({ onChange, value }) => (
+                      <TomatoRate handleClick={onChange} estimateRate={value} />
+                    )}
+                  />
                 </div>
               </form>
             </div>

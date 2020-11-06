@@ -1,12 +1,31 @@
 
+//size
+
+$size-themes:(
+  big:(
+    height: 3 * $font-basis,
+    font-size: 1.2 *  $font-basis 
+  ),
+  small:(
+    height: 2 * $font-basis,
+    font-size: 0.6 * $font-basis 
+  )
+);
+
 input {
-  height: 3 * $font-basis;
   outline: none;
   border: 0.15 * $font-basis solid transparent;
-  font-size: 1.2 * $font-basis;
   font-family: inherit;
   padding: 0.8 * $font-basis;
   border-radius: 0.5 * $font-basis;
+
+  
+  @each $size, $styles in $size-themes{
+    &[data-size=#{$size}]{
+      height: map-get($styles , height);
+      font-size:map-get($styles ,  font-size)
+    }
+  }
 
   &:focus{
     border-color: $tomato;

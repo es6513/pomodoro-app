@@ -57,6 +57,7 @@ function NewTask() {
             TASK TITLE
           </label>
           <Input
+            data-size="big"
             className={`${ROOT_CLASS}__form-input`}
             inputName="taskTitle"
             useFormRef={formRegister({
