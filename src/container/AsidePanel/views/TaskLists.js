@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import classNames from "classnames";
 import { TaskListContext } from "../../../context";
 import { config } from "../../../config";
@@ -49,6 +49,30 @@ function TaskLists() {
   } = useContext(TaskListContext);
   const [filter, setFilter] = useState(switchNav[0].filter);
   const visibleTask = getVisibleTask(taskLists, filter);
+  const [isTaskSpread, setIsTaskSpread] = useState(false);
+  const [spreadId, setSpreadId] = useState(null);
+
+  useEffect(() => {
+    setSpreadId(null);
+  }, [filter]);
+  const getTaskItemClassName = (index) => {
+    const taskItemClassName = classNames({
+      [`${ROOT_CLASS}__task-lists__task-item`]: true,
+      [`${ROOT_CLASS}__task-lists__task-item__spread`]:
+        index === spreadId && isTaskSpread,
+    });
+    return taskItemClassName;
+  };
+
+  const handleSpread = (index) => {
+    if (index === spreadId) setIsTaskSpread((prevState) => !prevState);
+    else if (index !== spreadId && isTaskSpread) {
+      setSpreadId(index);
+    } else if (index !== spreadId && !isTaskSpread) {
+      setIsTaskSpread(true);
+      setSpreadId(index);
+    }
+  };
 
   const handleSelectTask = (id, index) => {
     const payload = { id };
@@ -82,9 +106,12 @@ function TaskLists() {
         {visibleTask.map((el, index) => (
           <div
             key={el.id}
-            className={`${ROOT_CLASS}__task-lists__task-item`}
+            className={getTaskItemClassName(index)}
             style={{ marginBottom: "1px" }}
-            onClick={() => handleSelectTask(el.id, index)}
+            onClick={() => {
+              handleSelectTask(el.id, index);
+              handleSpread(index);
+            }}
           >
             <div className={`${ROOT_CLASS}__task-lists__task-item-info`}>
               <HeadTitle headTag="h4">{el.taskTitle}</HeadTitle>
