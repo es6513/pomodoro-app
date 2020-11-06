@@ -1,4 +1,6 @@
 import React from "react";
+import { TaskListProvider } from "./context";
+
 import ModalTimer from "./container/ModalTimer";
 import AsidePanel from "./container/AsidePanel";
 import "./styles/main.scss";
@@ -11,8 +13,10 @@ const { ROOT_CLASS } = css;
 function App() {
   return (
     <div className={`${ROOT_CLASS}`}>
-      <ModalTimer />
-      <AsidePanel />
+      <TaskListProvider>
+        <ModalTimer />
+        <AsidePanel />
+      </TaskListProvider>
     </div>
   );
 }

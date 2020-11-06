@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { TaskListContext } from "../../../context";
 import { config } from "../../../config";
 import HeadTitle from "../../../components/HeadTitle";
 import withAsideLayout from "../../../hoc/withAsideLayout";
@@ -11,21 +13,18 @@ const { css } = config;
 const { ROOT_CLASS } = css;
 
 const defaultValues = {
-  id: "",
   taskTitle: "",
   estimatedTomato: 1,
-  isArchived: false,
-  isDone: false,
-  isBreak: false,
 };
 
 function NewTask() {
+  const { taskDispatch } = useContext(TaskListContext);
   const {
     register: formRegister,
     errors: formErrors,
+    reset: resetForm,
     formState,
     control,
-    reset,
     handleSubmit,
   } = useForm({
     mode: "all",
@@ -35,9 +34,18 @@ function NewTask() {
 
   const { isValid: formIsValid } = formState;
 
-  const onSubmit = (data, e) => {
-    console.log(data);
-    reset(defaultValues);
+  const onSubmit = (formData, e) => {
+    const task = {
+      id: uuidv4(),
+      isArchived: false,
+      isDone: false,
+      isBreak: false,
+      ...formData,
+    };
+    console.log(task);
+    const action = { type: "ADD_TASK", payload: task };
+    taskDispatch(action);
+    resetForm(defaultValues);
   };
 
   return (
