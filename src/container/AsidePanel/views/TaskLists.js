@@ -1,13 +1,10 @@
-import React, { useContext, useState, useEffect, useMemo } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import classNames from "classnames";
 import { TaskListContext } from "../../../context";
 import { config } from "../../../config";
-import { getCurrentTask } from "../../util";
 import HeadTitle from "../../../components/HeadTitle";
 import Button from "../../../components/Button";
-import TomatoRate from "../../../components/TomatoRate";
-import Input from "../../../components/Input";
-import { useForm, Controller } from "react-hook-form";
+import TaskFrom from "../../../components/TaskFrom";
 
 import withAsideLayout from "../../../hoc/withAsideLayout";
 
@@ -52,25 +49,15 @@ function TaskLists() {
   } = useContext(TaskListContext);
 
   //handle from
-  const defaultValues = {
-    taskTitle: "",
-    estimatedTomato: 5,
-  };
-  const {
-    register: formRegister,
-    errors: formErrors,
-    reset: resetForm,
-    formState,
-    setValue,
-    control,
-    handleSubmit,
-  } = useForm({
-    mode: "all",
-    criteriaMode: "all",
-    defaultValues,
-  });
 
-  const { isValid: formIsValid } = formState;
+  const onSubmit = (formData, e, resetForm) => {
+    console.log(formData);
+    const payload = { ...formData };
+    const action = { type: "UPDATE_TASK_STATE", id: currentId, payload };
+    taskDispatch(action);
+
+    // resetForm(defaultFromValues);
+  };
 
   const [filter, setFilter] = useState(switchNav[0].filter);
   const visibleTask = getVisibleTask(taskLists, filter);
@@ -112,10 +99,6 @@ function TaskLists() {
     setFilter(filter);
   };
 
-  const onSubmit = (formData) => {
-    console.log(formData);
-  };
-
   return (
     <div className={`${ROOT_CLASS}__aside-panel__task-lists-wrapper`}>
       <HeadTitle headTag="h1">TASK LISTS</HeadTitle>
@@ -151,70 +134,13 @@ function TaskLists() {
               <HeadTitle headTag="h4">{task.taskTitle}</HeadTitle>
             </div>
             <div className={`${ROOT_CLASS}__task-lists__task-item-detail`}>
-              <form
-                className={`${ROOT_CLASS}__task-lists__form`}
-                onSubmit={handleSubmit(onSubmit)}
-              >
-                <div
-                  className={`${ROOT_CLASS}__form-group `}
-                  data-flex="flex-column"
-                >
-                  <label
-                    htmlFor="taskTitle"
-                    className={`${ROOT_CLASS}__form-label`}
-                  >
-                    TASK TITLE
-                  </label>
-                  <Input
-                    data-size="small"
-                    className={`${ROOT_CLASS}__form-input`}
-                    inputName="taskTitle"
-                    useFormRef={formRegister({
-                      required: "This field is required.",
-                    })}
-                    errors={formErrors}
-                  />
-                </div>
-                <div
-                  className={`${ROOT_CLASS}__form-group`}
-                  data-flex="flex-column"
-                >
-                  <label className={`${ROOT_CLASS}__form-label`}>
-                    ESTIMATED TOMATO
-                  </label>
-                  <Controller
-                    control={control}
-                    name="estimatedTomato"
-                    render={({ onChange, value }) => (
-                      <TomatoRate handleClick={onChange} estimateRate={value} />
-                    )}
-                  />
-                </div>
-                <div
-                  className={`${ROOT_CLASS}__form-group`}
-                  data-flex="flex-row"
-                >
-                  <Button
-                    data-size="small"
-                    data-color="gray"
-                    data-radius="general"
-                    type="button"
-                    className={`${ROOT_CLASS}__form-button`}
-                  >
-                    ARCHIVE
-                  </Button>
-                  <Button
-                    data-size="small"
-                    data-color="primary"
-                    data-radius="general"
-                    type="submit"
-                    disabled={!formIsValid}
-                    className={`${ROOT_CLASS}__form-button`}
-                  >
-                    SAVE
-                  </Button>
-                </div>
-              </form>
+              <TaskFrom
+                defaultValues={{
+                  taskTitle: task.taskTitle,
+                  estimatedTomato: task.estimatedTomato,
+                }}
+                handleSubmit={onSubmit}
+              />
             </div>
           </div>
         ))}

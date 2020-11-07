@@ -36,8 +36,12 @@ $size-themes:(
     height: 3 * $font-basis,
     font-size: $font-basis 
   ),
-  small:(
+  medium:(
     height: 2 * $font-basis,
+    font-size: 0.5 * $font-basis 
+  ),
+  small:(
+    height: 1.5 * $font-basis,
     font-size: 0.5 * $font-basis 
   )
 );

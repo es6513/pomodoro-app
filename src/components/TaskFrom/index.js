@@ -1,18 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import { PropTypes } from "prop-types";
-import { v4 as uuidv4 } from "uuid";
 import { useForm, Controller } from "react-hook-form";
 import { config } from "../../config";
-import TomatoRate from "../../../components/TomatoRate";
-import Input from "../../../components/Input";
-import Button from "../../../components/Button";
+import TomatoRate from "../TomatoRate";
+import Input from "../Input";
+import Button from "../Button";
 import { withRouter } from "react-router";
 
 const { css } = config;
 const { ROOT_CLASS } = css;
 
 function TaskForm(props) {
-  const { defaultValues, handleSubmit, currentTask, pagePath } = props;
+  const { defaultValues, handleSubmit, currentTask = {}, location } = props;
   const {
     register: formRegister,
     errors: formErrors,
@@ -26,10 +25,14 @@ function TaskForm(props) {
     defaultValues,
   });
 
+  console.log(location);
+
+  const page = location.pathname === "/add" ? "add" : "todo";
+
   const { isValid: formIsValid } = formState;
 
   return (
-    <form onSubmit={submitForm(handleSubmit)}>
+    <form onSubmit={submitForm((data, e) => handleSubmit(data, e, resetForm))}>
       <div className={`${ROOT_CLASS}__form-group`} data-flex="flex-column">
         <label htmlFor="taskTitle" className={`${ROOT_CLASS}__form-label`}>
           TASK TITLE
@@ -54,23 +57,49 @@ function TaskForm(props) {
           )}
         />
       </div>
-      <Button
-        data-size="big"
-        data-color="primary"
-        data-radius="general"
-        data-layout="full"
-        type="submit"
-        disabled={!formIsValid}
-      >
-        ADD TASK
-      </Button>
+      {page === "add" ? (
+        <Button
+          data-size="big"
+          data-color="primary"
+          data-radius="general"
+          data-layout="full"
+          type="submit"
+          disabled={!formIsValid}
+        >
+          ADD TASK
+        </Button>
+      ) : (
+        <div className={`${ROOT_CLASS}__form-group`} data-flex="flex-row">
+          <Button
+            data-size="medium"
+            data-color="gray"
+            data-radius="general"
+            type="button"
+            className={`${ROOT_CLASS}__form-button`}
+          >
+            ARCHIVE
+          </Button>
+          <Button
+            data-size="medium"
+            data-color="primary"
+            data-radius="general"
+            type="submit"
+            disabled={!formIsValid}
+            className={`${ROOT_CLASS}__form-button`}
+          >
+            SAVE
+          </Button>
+        </div>
+      )}
     </form>
   );
 }
+
+export default withRouter(TaskForm);
 
 TaskForm.propTypes = {
   defaultValues: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   currentTask: PropTypes.object.isRequired,
-  pagePath: PropTypes.string.isRequired,
+  location: PropTypes.object.isRequired,
 };
