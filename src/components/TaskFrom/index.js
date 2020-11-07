@@ -11,7 +11,14 @@ const { css } = config;
 const { ROOT_CLASS } = css;
 
 function TaskForm(props) {
-  const { defaultValues, handleSubmit, currentTask = {}, location } = props;
+  const {
+    className,
+    defaultValues,
+    handleSubmit,
+    currentTask,
+    location,
+  } = props;
+
   const {
     register: formRegister,
     errors: formErrors,
@@ -25,14 +32,23 @@ function TaskForm(props) {
     defaultValues,
   });
 
-  console.log(location);
-
   const page = location.pathname === "/add" ? "add" : "todo";
 
   const { isValid: formIsValid } = formState;
 
+  const buttonDisabled = () => {
+    if (page === "add") return !formIsValid;
+    else {
+      const { dirtyFields } = formState;
+      return Object.keys(dirtyFields).length === 0;
+    }
+  };
+
   return (
-    <form onSubmit={submitForm((data, e) => handleSubmit(data, e, resetForm))}>
+    <form
+      className={className}
+      onSubmit={submitForm((data, e) => handleSubmit(data, e, resetForm))}
+    >
       <div className={`${ROOT_CLASS}__form-group`} data-flex="flex-column">
         <label htmlFor="taskTitle" className={`${ROOT_CLASS}__form-label`}>
           TASK TITLE
@@ -43,6 +59,9 @@ function TaskForm(props) {
           inputName="taskTitle"
           useFormRef={formRegister({
             required: "This field is required.",
+            validate: {
+              trimmedValue: (value) => value.trim().length > 0,
+            },
           })}
           errors={formErrors}
         />
@@ -84,7 +103,7 @@ function TaskForm(props) {
             data-color="primary"
             data-radius="general"
             type="submit"
-            disabled={!formIsValid}
+            disabled={buttonDisabled()}
             className={`${ROOT_CLASS}__form-button`}
           >
             SAVE
@@ -98,8 +117,13 @@ function TaskForm(props) {
 export default withRouter(TaskForm);
 
 TaskForm.propTypes = {
+  className: PropTypes.string,
   defaultValues: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   currentTask: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
+};
+
+TaskForm.defaultProps = {
+  className: "",
 };

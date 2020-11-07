@@ -5,7 +5,7 @@ import { config } from "../../../config";
 import HeadTitle from "../../../components/HeadTitle";
 import Button from "../../../components/Button";
 import TaskFrom from "../../../components/TaskFrom";
-
+import { getCurrentTask } from "../../util";
 import withAsideLayout from "../../../hoc/withAsideLayout";
 
 const { css } = config;
@@ -55,12 +55,15 @@ function TaskLists() {
     const payload = { ...formData };
     const action = { type: "UPDATE_TASK_STATE", id: currentId, payload };
     taskDispatch(action);
-
-    // resetForm(defaultFromValues);
+    resetForm(formData, { isDirty: false });
   };
 
+  //handleVisibleTasks
   const [filter, setFilter] = useState(switchNav[0].filter);
   const visibleTask = getVisibleTask(taskLists, filter);
+  const handleSwitchFilter = (filter) => {
+    setFilter(filter);
+  };
 
   //handleAccordion
 
@@ -89,14 +92,11 @@ function TaskLists() {
     }
   };
 
+  //HandleSelectTask
   const handleSelectTask = (id) => {
     const payload = { id };
     const action = { type: "SET_CURRENT_TASK", payload };
     taskDispatch(action);
-  };
-
-  const handleSwitchFilter = (filter) => {
-    setFilter(filter);
   };
 
   return (
@@ -135,11 +135,13 @@ function TaskLists() {
             </div>
             <div className={`${ROOT_CLASS}__task-lists__task-item-detail`}>
               <TaskFrom
+                className={`${ROOT_CLASS}__task-lists__form`}
                 defaultValues={{
                   taskTitle: task.taskTitle,
                   estimatedTomato: task.estimatedTomato,
                 }}
                 handleSubmit={onSubmit}
+                currentTask={task}
               />
             </div>
           </div>

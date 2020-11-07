@@ -26,7 +26,7 @@ $_aside-panel__task-lists-wrapper:#{$_aside-panel}__task-lists-wrapper;
     &__spread{
 
       #{$root-class}__task-lists__task-item-detail{
-        height: 240px;
+        height: 500px;
         opacity: 1;
         transition: height 0.5s;
         padding: 0 2 * $font-basis;
