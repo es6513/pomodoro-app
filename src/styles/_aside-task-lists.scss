@@ -52,18 +52,21 @@ $_aside-panel__task-lists-wrapper:#{$_aside-panel}__task-lists-wrapper;
         fill:$white;
       }
     }
-    
+  }
+
+  #{$root-class}__task-lists__spread-content{
+    border-top: 1px solid $black-100;
+    padding-top: 1* $font-basis;
   }
 
   // form
 
   #{$root-class}__task-lists__form{
-    border-top: 1px solid $black-100;
     padding-bottom: 1* $font-basis;
   }
 
   #{$root-class}__form-group{
-    margin-top:  1.5 * $font-basis;
+    margin-bottom:  1.5 * $font-basis;
 
     #{$root-class}__form-button{
 

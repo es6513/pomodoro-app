@@ -71,7 +71,7 @@ function TaskLists() {
   const [spreadId, setSpreadId] = useState(null);
   useEffect(() => {
     setSpreadId(null);
-  }, [filter]);
+  }, [filter, taskLists]);
 
   const getTaskDetailClassName = (index) => {
     const taskItemClassName = classNames({
@@ -97,6 +97,63 @@ function TaskLists() {
     const payload = { id };
     const action = { type: "SET_CURRENT_TASK", payload };
     taskDispatch(action);
+  };
+
+  //render content
+
+  const renderDetailContent = (task) => {
+    switch (filter) {
+      case "SHOW_UNDONE":
+        return (
+          <TaskFrom
+            className={`${ROOT_CLASS}__task-lists__form`}
+            defaultValues={{
+              taskTitle: task.taskTitle,
+              estimatedTomato: task.estimatedTomato,
+            }}
+            handleSubmit={onSubmit}
+          />
+        );
+      case "SHOW_DONE":
+        return (
+          <div className={`${ROOT_CLASS}__form-group`} data-flex="flex-row">
+            <Button
+              data-size="medium"
+              data-color="gray"
+              data-radius="general"
+              type="button"
+              className={`${ROOT_CLASS}__form-button`}
+            >
+              ARCHIVE
+            </Button>
+            <Button
+              data-size="medium"
+              data-color="primary"
+              data-radius="general"
+              type="submit"
+              className={`${ROOT_CLASS}__form-button`}
+            >
+              REDO
+            </Button>
+          </div>
+        );
+      case "SHOW_ARCHIVE":
+        return (
+          <div className={`${ROOT_CLASS}__form-group`} data-flex="flex-row">
+            <Button
+              data-size="big"
+              data-color="gray"
+              data-radius="general"
+              type="button"
+              className={`${ROOT_CLASS}__form-button`}
+            >
+              ARCHIVE
+            </Button>
+          </div>
+        );
+      default:
+        break;
+    }
   };
 
   return (
@@ -135,21 +192,10 @@ function TaskLists() {
             >
               <HeadTitle headTag="h4">{task.taskTitle}</HeadTitle>
             </TaskInfo>
-            {/* <div
-              className={`${ROOT_CLASS}__task-lists__task-item-info`}
-              onClick={() => handleSpread(index)}
-            >
-              <HeadTitle headTag="h4">{task.taskTitle}</HeadTitle>
-            </div> */}
             <div className={getTaskDetailClassName(index)}>
-              <TaskFrom
-                className={`${ROOT_CLASS}__task-lists__form`}
-                defaultValues={{
-                  taskTitle: task.taskTitle,
-                  estimatedTomato: task.estimatedTomato,
-                }}
-                handleSubmit={onSubmit}
-              />
+              <div className={`${ROOT_CLASS}__task-lists__spread-content`}>
+                {renderDetailContent(task)}
+              </div>
             </div>
           </div>
         ))}

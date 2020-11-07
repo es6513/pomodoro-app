@@ -19,7 +19,7 @@ function TaskInfo({
         }`}
       >
         {isDone ? (
-          <Icons.Complete width="15" style={{ top: 0 }} />
+          <Icons.Complete width="15" />
         ) : isCurrent ? (
           <Icons.TomatoColor width="10" />
         ) : null}

@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { TaskListContext } from "../../../context";
+import withAsideLayout from "../../../hoc/withAsideLayout";
 import { config } from "../../../config";
 import HeadTitle from "../../../components/HeadTitle";
-import withAsideLayout from "../../../hoc/withAsideLayout";
 import TaskFrom from "../../../components/TaskFrom";
 
 const { css } = config;
