@@ -1,7 +1,3 @@
-import { lazy } from "react";
-
-//lazy load
-
-export const lazyLoadComponent = (componentPath) => {
-  return lazy(() => import(componentPath));
+export const getCurrentTask = (currentId, taskLists) => {
+  return currentId ? taskLists.find((task) => task.id === currentId) : null;
 };

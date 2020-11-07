@@ -1,7 +1,8 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useMemo } from "react";
 import classNames from "classnames";
 import { TaskListContext } from "../../../context";
 import { config } from "../../../config";
+import { getCurrentTask } from "../../util";
 import HeadTitle from "../../../components/HeadTitle";
 import Button from "../../../components/Button";
 import TomatoRate from "../../../components/TomatoRate";
@@ -51,17 +52,16 @@ function TaskLists() {
   } = useContext(TaskListContext);
 
   //handle from
-
   const defaultValues = {
     taskTitle: "",
-    estimatedTomato: 1,
+    estimatedTomato: 5,
   };
-
   const {
     register: formRegister,
     errors: formErrors,
     reset: resetForm,
     formState,
+    setValue,
     control,
     handleSubmit,
   } = useForm({
@@ -102,7 +102,7 @@ function TaskLists() {
     }
   };
 
-  const handleSelectTask = (id, index) => {
+  const handleSelectTask = (id) => {
     const payload = { id };
     const action = { type: "SET_CURRENT_TASK", payload };
     taskDispatch(action);
@@ -110,6 +110,10 @@ function TaskLists() {
 
   const handleSwitchFilter = (filter) => {
     setFilter(filter);
+  };
+
+  const onSubmit = (formData) => {
+    console.log(formData);
   };
 
   return (
@@ -131,21 +135,26 @@ function TaskLists() {
         ))}
       </div>
       <div className={`${ROOT_CLASS}__task-lists__task-lists`}>
-        {visibleTask.map((el, index) => (
+        {visibleTask.map((task, index) => (
           <div
-            key={el.id}
+            key={task.id}
             className={getTaskItemClassName(index)}
             style={{ marginBottom: "1px" }}
-            onClick={() => handleSelectTask(el.id, index)}
+            onClick={() => {
+              handleSelectTask(task.id);
+            }}
           >
             <div
               className={`${ROOT_CLASS}__task-lists__task-item-info`}
               onClick={() => handleSpread(index)}
             >
-              <HeadTitle headTag="h4">{el.taskTitle}</HeadTitle>
+              <HeadTitle headTag="h4">{task.taskTitle}</HeadTitle>
             </div>
             <div className={`${ROOT_CLASS}__task-lists__task-item-detail`}>
-              <form className={`${ROOT_CLASS}__task-lists__form`}>
+              <form
+                className={`${ROOT_CLASS}__task-lists__form`}
+                onSubmit={handleSubmit(onSubmit)}
+              >
                 <div
                   className={`${ROOT_CLASS}__form-group `}
                   data-flex="flex-column"
@@ -189,7 +198,7 @@ function TaskLists() {
                     data-size="small"
                     data-color="gray"
                     data-radius="general"
-                    type="submit"
+                    type="button"
                     className={`${ROOT_CLASS}__form-button`}
                   >
                     ARCHIVE
