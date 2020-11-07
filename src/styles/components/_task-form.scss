@@ -1,0 +1,27 @@
+
+
+$_task-form: #{$root-class}__form;
+
+#{$_task-form}{
+
+
+  &-group{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  &-label{
+    font-weight: 600;
+    letter-spacing: 0.1 * $font-basis;
+    color:$gray-300;
+    margin-bottom: 0.8 * $font-basis;
+  }
+  
+  &-rate-group{
+    display: flex;
+    justify-content: space-between;
+  }
+
+}
+

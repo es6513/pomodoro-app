@@ -1,0 +1,15 @@
+
+#{$root-class}__form-rate-tomato{
+  cursor: pointer;
+  circle{
+    fill:$gray-300
+  }
+  rect{
+    fill:$gray-400
+  }
+}
+
+#{$root-class}__form-rate-tomato__active{
+  cursor: pointer;
+}
+

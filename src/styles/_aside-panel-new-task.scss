@@ -6,39 +6,9 @@ $_aside-panel__new-task: #{$_aside-panel}__new-task;
 #{$_aside-panel__new-task}{
 
   #{$root-class}__form-group{
-    display: flex;
-    flex-direction: column;
     margin-bottom: 1.8 * $font-basis;
-    position: relative;
   }
 
-  #{$root-class}__form-label{
-    font-weight: 600;
-    letter-spacing: 0.1 * $font-basis;
-    color:$gray-300;
-    margin-bottom: 0.8 * $font-basis;
-  }
-
-  
-  #{$root-class}__form-rate-group{
-    display: flex;
-    justify-content: space-between;
-    
-  }
-
-  #{$root-class}__form-rate-tomato{
-   cursor: pointer;
-    circle{
-      fill:$gray-300
-    }
-    rect{
-      fill:$gray-400
-    }
-  }
-
-  #{$root-class}__form-rate-tomato__active{
-    cursor: pointer;
-   }
 
 }
 
