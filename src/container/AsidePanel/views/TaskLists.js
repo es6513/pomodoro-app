@@ -50,6 +50,8 @@ function TaskLists() {
     taskDispatch,
   } = useContext(TaskListContext);
 
+  //handle from
+
   const defaultValues = {
     taskTitle: "",
     estimatedTomato: 1,
@@ -67,14 +69,20 @@ function TaskLists() {
     criteriaMode: "all",
     defaultValues,
   });
+
+  const { isValid: formIsValid } = formState;
+
   const [filter, setFilter] = useState(switchNav[0].filter);
   const visibleTask = getVisibleTask(taskLists, filter);
+
+  //handleAccordion
+
   const [isTaskSpread, setIsTaskSpread] = useState(false);
   const [spreadId, setSpreadId] = useState(null);
-
   useEffect(() => {
     setSpreadId(null);
   }, [filter]);
+
   const getTaskItemClassName = (index) => {
     const taskItemClassName = classNames({
       [`${ROOT_CLASS}__task-lists__task-item`]: true,
@@ -138,7 +146,10 @@ function TaskLists() {
             </div>
             <div className={`${ROOT_CLASS}__task-lists__task-item-detail`}>
               <form className={`${ROOT_CLASS}__task-lists__form`}>
-                <div className={`${ROOT_CLASS}__form-group`}>
+                <div
+                  className={`${ROOT_CLASS}__form-group `}
+                  data-flex="flex-column"
+                >
                   <label
                     htmlFor="taskTitle"
                     className={`${ROOT_CLASS}__form-label`}
@@ -155,7 +166,10 @@ function TaskLists() {
                     errors={formErrors}
                   />
                 </div>
-                <div className={`${ROOT_CLASS}__form-group`}>
+                <div
+                  className={`${ROOT_CLASS}__form-group`}
+                  data-flex="flex-column"
+                >
                   <label className={`${ROOT_CLASS}__form-label`}>
                     ESTIMATED TOMATO
                   </label>
@@ -166,6 +180,30 @@ function TaskLists() {
                       <TomatoRate handleClick={onChange} estimateRate={value} />
                     )}
                   />
+                </div>
+                <div
+                  className={`${ROOT_CLASS}__form-group`}
+                  data-flex="flex-row"
+                >
+                  <Button
+                    data-size="small"
+                    data-color="gray"
+                    data-radius="general"
+                    type="submit"
+                    className={`${ROOT_CLASS}__form-button`}
+                  >
+                    ARCHIVE
+                  </Button>
+                  <Button
+                    data-size="small"
+                    data-color="primary"
+                    data-radius="general"
+                    type="submit"
+                    disabled={!formIsValid}
+                    className={`${ROOT_CLASS}__form-button`}
+                  >
+                    SAVE
+                  </Button>
                 </div>
               </form>
             </div>

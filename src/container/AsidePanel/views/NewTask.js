@@ -52,7 +52,7 @@ function NewTask() {
     <div className={`${ROOT_CLASS}__aside-panel__new-task`}>
       <HeadTitle headTag="h1">ADD NEW TASK</HeadTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className={`${ROOT_CLASS}__form-group`}>
+        <div className={`${ROOT_CLASS}__form-group`} data-flex="flex-column">
           <label htmlFor="taskTitle" className={`${ROOT_CLASS}__form-label`}>
             TASK TITLE
           </label>
@@ -66,7 +66,7 @@ function NewTask() {
             errors={formErrors}
           />
         </div>
-        <div className={`${ROOT_CLASS}__form-group`}>
+        <div className={`${ROOT_CLASS}__form-group`} data-flex="flex-column">
           <label className={`${ROOT_CLASS}__form-label`}>
             ESTIMATED TOMATO
           </label>

@@ -1,14 +1,30 @@
 
 
+//group
+
+$form-group-themes:(
+  flex-column:(
+    flex-direction: column
+  ),
+  flex-row:(
+    flex-direction: row,
+  ),
+);
+
+
 $_task-form: #{$root-class}__form;
 
 #{$_task-form}{
 
-
   &-group{
     display: flex;
-    flex-direction: column;
     position: relative;
+
+    @each $group, $styles in $form-group-themes {
+      &[data-flex=#{$group}]{
+        flex-direction: map-get($styles , flex-direction);
+      }
+    }
   }
 
   &-label{

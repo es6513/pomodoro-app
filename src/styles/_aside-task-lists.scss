@@ -26,7 +26,7 @@ $_aside-panel__task-lists-wrapper:#{$_aside-panel}__task-lists-wrapper;
     &__spread{
 
       #{$root-class}__task-lists__task-item-detail{
-        height: 180px;
+        height: 220px;
         opacity: 1;
         transition: height 0.5s;
         padding: 0 2 * $font-basis;
@@ -47,7 +47,20 @@ $_aside-panel__task-lists-wrapper:#{$_aside-panel}__task-lists-wrapper;
   }
 
   #{$root-class}__form-group{
-    padding-top:  0.8 * $font-basis;
+    margin-top:  1.5 * $font-basis;
+
+    #{$root-class}__form-button{
+      flex-grow: 1;
+
+      &:nth-child(1){
+        flex-grow: 1;
+      }
+
+      &:nth-child(2){
+        flex-grow: 2;
+        margin-left: 1 * $font-basis;
+      }
+    }
   }
   
   #{$root-class}__form-label{
