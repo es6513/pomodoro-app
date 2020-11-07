@@ -5,8 +5,8 @@ import { config } from "../../../config";
 import HeadTitle from "../../../components/HeadTitle";
 import Button from "../../../components/Button";
 import TaskFrom from "../../../components/TaskFrom";
-import { getCurrentTask } from "../../util";
 import withAsideLayout from "../../../hoc/withAsideLayout";
+import Icons from "../../../components/Icon";
 
 const { css } = config;
 const { ROOT_CLASS } = css;
@@ -82,6 +82,15 @@ function TaskLists() {
     return taskItemClassName;
   };
 
+  const getTaskDetailClassName = (index) => {
+    const taskItemClassName = classNames({
+      [`${ROOT_CLASS}__task-lists__task-item-detail`]: true,
+      [`${ROOT_CLASS}__task-lists__task-item-detail__spread`]:
+        index === spreadId && isTaskSpread,
+    });
+    return taskItemClassName;
+  };
+
   const handleSpread = (index) => {
     if (index === spreadId) setIsTaskSpread((prevState) => !prevState);
     else if (index !== spreadId && isTaskSpread) {
@@ -121,7 +130,7 @@ function TaskLists() {
         {visibleTask.map((task, index) => (
           <div
             key={task.id}
-            className={getTaskItemClassName(index)}
+            className={`${ROOT_CLASS}__task-lists__task-item`}
             style={{ marginBottom: "1px" }}
             onClick={() => {
               handleSelectTask(task.id);
@@ -133,7 +142,7 @@ function TaskLists() {
             >
               <HeadTitle headTag="h4">{task.taskTitle}</HeadTitle>
             </div>
-            <div className={`${ROOT_CLASS}__task-lists__task-item-detail`}>
+            <div className={getTaskDetailClassName(index)}>
               <TaskFrom
                 className={`${ROOT_CLASS}__task-lists__form`}
                 defaultValues={{
@@ -141,7 +150,6 @@ function TaskLists() {
                   estimatedTomato: task.estimatedTomato,
                 }}
                 handleSubmit={onSubmit}
-                currentTask={task}
               />
             </div>
           </div>

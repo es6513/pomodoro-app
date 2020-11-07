@@ -11,13 +11,7 @@ const { css } = config;
 const { ROOT_CLASS } = css;
 
 function TaskForm(props) {
-  const {
-    className,
-    defaultValues,
-    handleSubmit,
-    currentTask,
-    location,
-  } = props;
+  const { className, defaultValues, handleSubmit, location } = props;
 
   const {
     register: formRegister,
@@ -120,7 +114,6 @@ TaskForm.propTypes = {
   className: PropTypes.string,
   defaultValues: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  currentTask: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
 };
 
