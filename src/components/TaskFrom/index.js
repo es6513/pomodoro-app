@@ -10,9 +10,7 @@ import { withRouter } from "react-router";
 const { css } = config;
 const { ROOT_CLASS } = css;
 
-function TaskForm(props) {
-  const { className, defaultValues, handleSubmit, location } = props;
-
+function TaskForm({ className, defaultValues, handleSubmit, location }) {
   const {
     register: formRegister,
     errors: formErrors,

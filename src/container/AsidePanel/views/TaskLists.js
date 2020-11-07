@@ -6,7 +6,7 @@ import HeadTitle from "../../../components/HeadTitle";
 import Button from "../../../components/Button";
 import TaskFrom from "../../../components/TaskFrom";
 import withAsideLayout from "../../../hoc/withAsideLayout";
-import Icons from "../../../components/Icon";
+import TaskInfo from "../../../components/TaskInfo";
 
 const { css } = config;
 const { ROOT_CLASS } = css;
@@ -73,15 +73,6 @@ function TaskLists() {
     setSpreadId(null);
   }, [filter]);
 
-  const getTaskItemClassName = (index) => {
-    const taskItemClassName = classNames({
-      [`${ROOT_CLASS}__task-lists__task-item`]: true,
-      [`${ROOT_CLASS}__task-lists__task-item__spread`]:
-        index === spreadId && isTaskSpread,
-    });
-    return taskItemClassName;
-  };
-
   const getTaskDetailClassName = (index) => {
     const taskItemClassName = classNames({
       [`${ROOT_CLASS}__task-lists__task-item-detail`]: true,
@@ -136,12 +127,20 @@ function TaskLists() {
               handleSelectTask(task.id);
             }}
           >
-            <div
+            <TaskInfo
+              className={`${ROOT_CLASS}__task-lists__task-item-info`}
+              handelCLick={() => handleSpread(index)}
+              isDone={task.isDone}
+              isCurrent={task.id === currentId}
+            >
+              <HeadTitle headTag="h4">{task.taskTitle}</HeadTitle>
+            </TaskInfo>
+            {/* <div
               className={`${ROOT_CLASS}__task-lists__task-item-info`}
               onClick={() => handleSpread(index)}
             >
               <HeadTitle headTag="h4">{task.taskTitle}</HeadTitle>
-            </div>
+            </div> */}
             <div className={getTaskDetailClassName(index)}>
               <TaskFrom
                 className={`${ROOT_CLASS}__task-lists__form`}

@@ -15,7 +15,7 @@ $_aside-panel__task-lists-wrapper:#{$_aside-panel}__task-lists-wrapper;
     padding: 0 2* $font-basis;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-out;
+    transition: max-height 0.5s ,opacity 0.5s;
     opacity: 0;
   }
 
@@ -26,14 +26,33 @@ $_aside-panel__task-lists-wrapper:#{$_aside-panel}__task-lists-wrapper;
   }
 
   #{$root-class}__task-lists__task-item{
-    // height: 40px;
-    background-color: $gray-200;;
+    background-color: $gray-200;
+    position: relative;
   }
 
   #{$root-class}__task-lists__task-item-info{
-    // height: 40px;
     padding: 0.8 * $font-basis 2 * $font-basis;
     cursor: pointer;
+
+    .task-info--prefix-current {
+      position: absolute;
+      top: 0.5rem;
+      left: 0.8rem;
+
+    }
+
+    .task-info--prefix-done {
+      position: absolute;
+      top: 0.8 * $font-basis;
+      left: 0.8 * $font-basis;
+      .st2{
+        fill:$white;
+      }
+      .st1{
+        fill:$white;
+      }
+    }
+    
   }
 
   // form
@@ -47,7 +66,6 @@ $_aside-panel__task-lists-wrapper:#{$_aside-panel}__task-lists-wrapper;
     margin-top:  1.5 * $font-basis;
 
     #{$root-class}__form-button{
-      flex-grow: 1;
 
       &:nth-child(1){
         flex-grow: 1;
