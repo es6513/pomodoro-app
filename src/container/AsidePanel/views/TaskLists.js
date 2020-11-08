@@ -44,7 +44,7 @@ function TaskLists() {
   const {
     taskState: {
       taskLists,
-      timer: { currentId },
+      timer: { currentId, isCountDown },
     },
     taskDispatch,
   } = useContext(TaskListContext);
@@ -94,6 +94,7 @@ function TaskLists() {
 
   //HandleSelectTask
   const handleSelectTask = (id) => {
+    if (isCountDown) return;
     const payload = { id };
     taskDispatch(actions.setCurrentTask(payload));
   };

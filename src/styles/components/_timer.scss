@@ -31,6 +31,9 @@ $_modal-timer-component: #{$root-class}__modal-timer;
         height: 48px;
       }
 
+      &:disabled{
+        background-color: $gray-500;
+      }
       &:not([disabled]){
         background-color: $white;
       }

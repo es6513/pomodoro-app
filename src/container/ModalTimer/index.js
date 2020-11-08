@@ -44,18 +44,15 @@ function ModalTimer() {
     taskDispatch(actions.setIsCountDown(payload));
   };
 
-  const handleBreak = (id, isBreak) => {
-    const payload = { id, isBreak };
+  const handleBreak = (payload) => {
     taskDispatch(actions.setIsBreak(payload));
   };
 
-  const handleWorkTIme = (id, workTime) => {
-    const payload = { id, workTime };
+  const handleWorkTIme = (payload) => {
     taskDispatch(actions.setWorkTime(payload));
   };
 
-  const handleBreakTIme = (id, breakTime) => {
-    const payload = { id, breakTime };
+  const handleBreakTIme = (payload) => {
     taskDispatch(actions.setBreakTime(payload));
   };
 

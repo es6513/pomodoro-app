@@ -63,21 +63,21 @@ function Timer({
     if (isCountDown) {
       if (!isBreak && !timeOut) {
         timeoutId.current = setTimeout(() => {
-          handleWorkTIme(id, workTime + 1);
+          handleWorkTIme({ id, workTime: workTime + 1 });
         }, 1000);
       } else if (isBreak && !timeOut) {
         timeoutId.current = setTimeout(() => {
-          handleBreakTIme(id, breakTime + 1);
+          handleBreakTIme({ id, breakTime: breakTime + 1 });
         }, 1000);
       } else if (!isBreak && timeOut) {
         handleCountDown(false);
-        handleBreak(id, true);
-        handleWorkTIme(id, 0);
+        handleBreak({ id, isBreak: true });
+        handleWorkTIme({ id, workTime: 0 });
         handleTaskUpdate({ id, finishTomato: finishTomato + 1 });
       } else if (isBreak && !timeOut) {
         handleCountDown(false);
-        handleBreak(id, false);
-        handleBreakTIme(id, 0);
+        handleBreak({ id, isBreak: false });
+        handleBreakTIme({ id, breakTime: 0 });
       }
     }
 
@@ -109,9 +109,9 @@ function Timer({
 
   const resetTimer = () => {
     if (isBreak) {
-      handleBreakTIme(id, 0);
+      handleBreakTIme({ id, breakTime: 0 });
     } else {
-      handleWorkTIme(id, 0);
+      handleWorkTIme({ id, workTime: 0 });
     }
   };
 
@@ -151,10 +151,11 @@ function Timer({
           type="button"
           className={`${ROOT_CLASS}__timer-button`}
           handleCLick={startTimer}
+          disabled={isCountDown}
         >
           <img
             src={Start}
-            alt="pause"
+            alt="start"
             className={`${ROOT_CLASS}__timer-button__icon`}
           />
         </Button>
@@ -165,6 +166,7 @@ function Timer({
           type="button"
           className={`${ROOT_CLASS}__timer-button`}
           handleCLick={pauseTimer}
+          disabled={!isCountDown}
         >
           <img
             src={Pause}
@@ -179,10 +181,11 @@ function Timer({
           type="button"
           className={`${ROOT_CLASS}__timer-button`}
           handleCLick={resetTimer}
+          disabled={isCountDown || workTime === 0}
         >
           <img
             src={Reset}
-            alt="pause"
+            alt="reset"
             className={`${ROOT_CLASS}__timer-button__icon`}
           />
         </Button>
