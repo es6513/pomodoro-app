@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { TaskListContext } from "../../../context";
+import { addTask } from "../../../context/taskLists/actions";
 import withAsideLayout from "../../../hoc/withAsideLayout";
 import { config } from "../../../config";
 import HeadTitle from "../../../components/HeadTitle";
@@ -25,8 +26,7 @@ function NewTask() {
       isBreak: false,
       ...formData,
     };
-    const action = { type: "ADD_TASK", payload: task };
-    taskDispatch(action);
+    taskDispatch(addTask(task));
     resetForm(defaultFromValues);
   };
 

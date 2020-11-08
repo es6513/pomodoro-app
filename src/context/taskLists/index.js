@@ -1,7 +1,8 @@
 import React, { useReducer } from "react";
 import PropTypes from "prop-types";
 import mockInitialState from "./mockData";
-
+import actionTypes from "./actionTypes";
+console.log(actionTypes);
 export const TaskListContext = React.createContext({});
 
 // const initialState = {

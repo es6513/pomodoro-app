@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import classNames from "classnames";
 import { TaskListContext } from "../../../context";
+import actions from "../../../context/taskLists/actions";
 import { config } from "../../../config";
 import HeadTitle from "../../../components/HeadTitle";
 import Button from "../../../components/Button";
@@ -53,8 +54,7 @@ function TaskLists() {
   const onSubmit = (formData, e, resetForm) => {
     console.log(formData);
     const payload = { ...formData };
-    const action = { type: "UPDATE_TASK_STATE", id: currentId, payload };
-    taskDispatch(action);
+    taskDispatch(actions.updateTaskState(currentId, payload));
     resetForm(formData, { isDirty: false });
   };
 
@@ -71,7 +71,7 @@ function TaskLists() {
   const [spreadId, setSpreadId] = useState(null);
   useEffect(() => {
     setSpreadId(null);
-  }, [filter, taskLists]);
+  }, [filter, visibleTask.length]);
 
   const getTaskDetailClassName = (index) => {
     const taskItemClassName = classNames({
@@ -95,8 +95,7 @@ function TaskLists() {
   //HandleSelectTask
   const handleSelectTask = (id) => {
     const payload = { id };
-    const action = { type: "SET_CURRENT_TASK", payload };
-    taskDispatch(action);
+    taskDispatch(actions.setCurrentTask(payload));
   };
 
   //render content
