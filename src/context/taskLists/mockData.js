@@ -15,7 +15,7 @@ mockInitialState.taskLists = mockInitialState.taskLists.map((el, index) => {
     isArchived: false,
     isDone: false,
     isBreak: false,
-    taskTitle: String(index + 1),
+    taskTitle: "Task" + String(index + 1),
     estimatedTomato: index + 1,
     estimatedWorkTime: (index + 1) * timeConstants.oneUnitWorkSeconds,
     workTime: 0,

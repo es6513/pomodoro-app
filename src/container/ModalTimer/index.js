@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { config } from "../../config";
 import { TaskListContext } from "../../context";
 import actions from "../../context/taskLists/actions";
+import HeadTitle from "../../components/HeadTitle";
+import Timer from "../../components/Timer";
 
 const { css } = config;
 const { ROOT_CLASS } = css;
@@ -17,11 +19,21 @@ function ModalTimer() {
 
   console.log(currentId);
 
-  const getCurrentTask = () => {
-    return currentId ? taskLists.find((task) => task.id === currentId) : null;
+  //show Task
+
+  const getShowTask = () => {
+    if (currentId) return taskLists.find((task) => task.id === currentId);
+    else {
+      const undoenTasks = taskLists.filter(
+        (task) => !task.isDone && !task.isArchived
+      );
+      return undoenTasks.length > 0 ? undoenTasks[0] : null;
+    }
   };
 
-  const currentTask = getCurrentTask();
+  const showedTask = getShowTask();
+
+  //handleTime
 
   const handleUpdateTask = () => {
     const payload = { isDone: true };
@@ -30,12 +42,21 @@ function ModalTimer() {
 
   return (
     <div className={`${ROOT_CLASS}__modal-timer`}>
-      {currentTask ? currentTask.taskTitle : null}
-      {currentTask ? (
+      <div className={`${ROOT_CLASS}__modal-timer__content`}>
+        {showedTask ? (
+          <HeadTitle headTag="h1">{showedTask.taskTitle}</HeadTitle>
+        ) : null}
+        <Timer
+          task={showedTask}
+          className={`${ROOT_CLASS}__modal-timer__timer`}
+        />
+      </div>
+
+      {/* {currentTask ? (
         <button type="button" onClick={handleUpdateTask}>
           Done
         </button>
-      ) : null}
+      ) : null} */}
     </div>
   );
 }

@@ -1,0 +1,13 @@
+
+
+$_modal-timer-component: #{$root-class}__modal-timer__timer;
+
+
+#{$_modal-timer-component}{
+
+  text{
+    font-size: 2*$font-basis;
+    font-weight: 800;
+  }
+
+}
