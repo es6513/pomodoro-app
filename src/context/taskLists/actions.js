@@ -52,6 +52,14 @@ export const setBreakTime = (payload) => {
   };
 };
 
-const actionCreators = { addTask, updateTaskState, setCurrentTask };
+const actionCreators = {
+  addTask,
+  updateTaskState,
+  setCurrentTask,
+  setIsCountDown,
+  setIsBreak,
+  setWorkTime,
+  setBreakTime,
+};
 
 export default actionCreators;

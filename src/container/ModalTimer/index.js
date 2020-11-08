@@ -35,31 +35,36 @@ function ModalTimer() {
 
   //handleUpdateTask
 
-  const handleUpdateTask = () => {
-    const payload = { isDone: true };
-    taskDispatch(actions.updateTaskState(currentId, payload));
-  };
-
   //handleTimerBehavior
+
+  console.log(actions);
 
   const handleCountDown = (isCountDown) => {
     const payload = { isCountDown };
     taskDispatch(actions.setIsCountDown(payload));
   };
 
-  const handleBreak = (isBreak) => {
-    const payload = { isBreak };
+  const handleBreak = (id, isBreak) => {
+    const payload = { id, isBreak };
     taskDispatch(actions.setIsBreak(payload));
   };
 
-  const handleWorkTIme = (id, workTIme) => {
-    const payload = { id, workTIme };
+  const handleWorkTIme = (id, workTime) => {
+    const payload = { id, workTime };
     taskDispatch(actions.setWorkTime(payload));
   };
 
   const handleBreakTIme = (id, breakTime) => {
     const payload = { id, breakTime };
     taskDispatch(actions.setBreakTime(payload));
+  };
+
+  const handleUpdateTask = () => {
+    const payload = { isDone: true };
+    taskDispatch(actions.updateTaskState(currentId, payload));
+  };
+  const handleTaskUpdate = (payload) => {
+    taskDispatch(actions.updateTaskState(payload));
   };
 
   return (
@@ -76,6 +81,7 @@ function ModalTimer() {
           handleBreak={handleBreak}
           handleWorkTIme={handleWorkTIme}
           handleBreakTIme={handleBreakTIme}
+          handleTaskUpdate={handleTaskUpdate}
         />
       </div>
 

@@ -12,9 +12,9 @@ const reducer = (state, action) => {
       };
     }
     case actionTypes.UPDATE_TASK_STATE: {
-      const { id } = action;
+      const { id, ...updateKey } = action.paylod;
       const updatedTaskLists = state.taskLists.map((task) => {
-        if (task.id === id) return { ...task, ...action.payload };
+        if (task.id === id) return { ...task, updateKey };
         return task;
       });
       return {
@@ -49,6 +49,7 @@ const reducer = (state, action) => {
     }
     case actionTypes.SET_WORK_TIME: {
       const { id, workTime } = action.payload;
+      console.log("payload", action.payload);
       const updatedTaskLists = state.taskLists.map((task) => {
         if (task.id === id) return { ...task, workTime };
         return task;

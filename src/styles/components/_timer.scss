@@ -34,6 +34,15 @@ $_modal-timer-component: #{$root-class}__modal-timer;
       &:not([disabled]){
         background-color: $white;
       }
+
+      &:not([disabled]):hover{
+        color: red;
+
+        &:after{
+          content: attr(data-after);
+          position: absolute;
+        }
+      }
     }
   }
  

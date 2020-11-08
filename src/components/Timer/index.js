@@ -11,16 +11,30 @@ import Reset from "../../assets/icons/reset_gray.svg";
 const { css } = config;
 const { ROOT_CLASS } = css;
 
-function Timer({ task, isCountDown, className }) {
-  const { workTime, breakTime, isBreak, estimatedWorkTime } = task;
+function Timer({
+  task,
+  className,
+  isCountDown,
+  handleCountDown,
+  handleBreak,
+  handleWorkTIme,
+  handleBreakTIme,
+  handleTaskUpdate,
+}) {
+  const {
+    id,
+    workTime,
+    breakTime,
+    isBreak,
+    estimatedWorkTime,
+    finishTomato,
+  } = task;
 
   //handle time appear
   const handleTimePercentage = (time, unitTime) => {
     return Math.round((time / unitTime) * (1500 / 2));
   };
-
   const handleRemainTime = (remainTime) => {
-    // const minutes =
     const date = new Date(0);
     date.setSeconds(remainTime);
     const timeString = date.toISOString().substr(14, 5);
@@ -37,13 +51,69 @@ function Timer({ task, isCountDown, className }) {
 
   //handle side effect
   const timeoutId = useRef(null);
+  const checkTimeOut = (time, uniTime) => {
+    return time === uniTime ? true : false;
+  };
 
-  // useEffect(() => {
-  //   effect;
-  //   return () => {
-  //     clearTimeout(timeoutId.current);
-  //   };
-  // }, []);
+  const timeOut = isBreak
+    ? checkTimeOut(breakTime, timeConstants.oneUnitBreakSeconds)
+    : checkTimeOut(workTime, timeConstants.oneUnitWorkSeconds);
+
+  useEffect(() => {
+    if (isCountDown) {
+      if (!isBreak && !timeOut) {
+        timeoutId.current = setTimeout(() => {
+          handleWorkTIme(id, workTime + 1);
+        }, 1000);
+      } else if (isBreak && !timeOut) {
+        timeoutId.current = setTimeout(() => {
+          handleBreakTIme(id, breakTime + 1);
+        }, 1000);
+      } else if (!isBreak && timeOut) {
+        handleCountDown(false);
+        handleBreak(id, true);
+        handleWorkTIme(id, 0);
+        handleTaskUpdate({ id, finishTomato: finishTomato + 1 });
+      } else if (isBreak && !timeOut) {
+        handleCountDown(false);
+        handleBreak(id, false);
+        handleBreakTIme(id, 0);
+      }
+    }
+
+    return () => {
+      clearTimeout(timeoutId.current);
+    };
+  }, [
+    id,
+    isBreak,
+    isCountDown,
+    workTime,
+    handleWorkTIme,
+    timeOut,
+    breakTime,
+    handleBreak,
+    handleBreakTIme,
+    handleCountDown,
+    finishTomato,
+    handleTaskUpdate,
+  ]);
+
+  const startTimer = () => {
+    handleCountDown(true);
+  };
+
+  const pauseTimer = () => {
+    handleCountDown(false);
+  };
+
+  const resetTimer = () => {
+    if (isBreak) {
+      handleBreakTIme(id, 0);
+    } else {
+      handleWorkTIme(id, 0);
+    }
+  };
 
   return (
     <div className={className}>
@@ -77,8 +147,10 @@ function Timer({ task, isCountDown, className }) {
         <Button
           data-size="medium"
           data-radius="rounded"
+          data-after="START"
           type="button"
           className={`${ROOT_CLASS}__timer-button`}
+          handleCLick={startTimer}
         >
           <img
             src={Start}
@@ -89,8 +161,10 @@ function Timer({ task, isCountDown, className }) {
         <Button
           data-size="medium"
           data-radius="rounded"
+          data-after="PAUSE"
           type="button"
           className={`${ROOT_CLASS}__timer-button`}
+          handleCLick={pauseTimer}
         >
           <img
             src={Pause}
@@ -101,8 +175,10 @@ function Timer({ task, isCountDown, className }) {
         <Button
           data-size="medium"
           data-radius="rounded"
+          data-after="RESET"
           type="button"
           className={`${ROOT_CLASS}__timer-button`}
+          handleCLick={resetTimer}
         >
           <img
             src={Reset}
@@ -125,4 +201,5 @@ Timer.propTypes = {
   handleBreak: PropTypes.func.isRequired,
   handleWorkTIme: PropTypes.func.isRequired,
   handleBreakTIme: PropTypes.func.isRequired,
+  handleTaskUpdate: PropTypes.func.isRequired,
 };
