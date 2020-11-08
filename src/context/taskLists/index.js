@@ -2,25 +2,16 @@ import React, { useReducer } from "react";
 import PropTypes from "prop-types";
 import mockInitialState from "./mockData";
 import actionTypes from "./actionTypes";
-console.log(actionTypes);
-export const TaskListContext = React.createContext({});
 
-// const initialState = {
-//   taskLists: [],
-//   timer: {
-//     currentId: "",
-//     isCountDown: false,
-//   },
-// };
 const reducer = (state, action) => {
   switch (action.type) {
-    case "ADD_TASK": {
+    case actionTypes.ADD_TASK: {
       return {
         ...state,
         taskLists: [...state.taskLists, action.payload],
       };
     }
-    case "UPDATE_TASK_STATE": {
+    case actionTypes.UPDATE_TASK_STATE: {
       const { id } = action;
       const updatedTaskLists = state.taskLists.map((task) => {
         if (task.id === id) return { ...task, ...action.payload };
@@ -31,7 +22,7 @@ const reducer = (state, action) => {
         taskLists: updatedTaskLists,
       };
     }
-    case "SET_CURRENT_TASK": {
+    case actionTypes.SET_CURRENT_TASK: {
       const { id } = action.payload;
       return {
         ...state,
@@ -42,6 +33,8 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
+export const TaskListContext = React.createContext({});
 
 export const TaskListProvider = ({ children }) => {
   const [taskState, taskDispatch] = useReducer(reducer, mockInitialState);

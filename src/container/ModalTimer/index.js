@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { config } from "../../config";
 import { TaskListContext } from "../../context";
+import actions from "../../context/taskLists/actions";
 
 const { css } = config;
 const { ROOT_CLASS } = css;
@@ -24,8 +25,7 @@ function ModalTimer() {
 
   const handleUpdateTask = () => {
     const payload = { isDone: true };
-    const action = { type: "UPDATE_TASK_STATE", id: currentId, payload };
-    taskDispatch(action);
+    taskDispatch(actions.updateTaskState(currentId, payload));
   };
 
   return (

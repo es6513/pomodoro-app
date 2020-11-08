@@ -3,9 +3,10 @@ import { v4 as uuidv4 } from "uuid";
 import { TaskListContext } from "../../../context";
 import { addTask } from "../../../context/taskLists/actions";
 import withAsideLayout from "../../../hoc/withAsideLayout";
-import { config } from "../../../config";
 import HeadTitle from "../../../components/HeadTitle";
 import TaskFrom from "../../../components/TaskFrom";
+import { config } from "../../../config";
+import { timeConstants } from "../../../context/taskLists/utils";
 
 const { css } = config;
 const { ROOT_CLASS } = css;
@@ -19,11 +20,16 @@ function NewTask() {
   };
 
   const onSubmit = (formData, e, resetForm) => {
+    const { estimatedTomato } = formData;
     const task = {
       id: uuidv4(),
       isArchived: false,
       isDone: false,
       isBreak: false,
+      estimatedWorkTime: estimatedTomato * timeConstants.oneUnitWorkSeconds,
+      workTime: 0,
+      breakTime: 0,
+      finishTomato: 0,
       ...formData,
     };
     taskDispatch(addTask(task));
