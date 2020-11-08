@@ -35,7 +35,7 @@ function Timer({
   const circlePerimeter = Math.round(circleRadius * 2 * 3.1415);
 
   const handleTimePercentage = (time, unitTime) => {
-    return Math.round((time / unitTime) * circlePerimeter);
+    return ((time / unitTime) * circlePerimeter).toFixed(2);
   };
   const handleRemainTime = (remainTime) => {
     const date = new Date(0);
@@ -74,6 +74,7 @@ function Timer({
           handleBreakTIme({ id, breakTime: breakTime + 1 });
         }, 1000);
       } else if (!isBreak && timeOut) {
+        console.log("here");
         handleCountDown(false);
         handleBreak({ id, isBreak: true });
         handleWorkTIme({ id, workTime: 0 });

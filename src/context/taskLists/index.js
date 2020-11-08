@@ -5,6 +5,7 @@ import actionTypes from "./actionTypes";
 
 const reducer = (state, action) => {
   console.log(action.type);
+  console.log(action.payload);
   switch (action.type) {
     case actionTypes.ADD_TASK: {
       return {

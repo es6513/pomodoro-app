@@ -55,20 +55,20 @@ function ModalTimer() {
     taskDispatch(actions.updateTaskState(payload));
   };
 
-  const selectNextTask = () => {
-    console.log(taskLists);
+  const handleDoneTask = () => {
+    const payload = { id: currentId, isDone: true };
+    handleTaskUpdate(payload);
+  };
+
+  const { isDone } = showedTask;
+
+  useEffect(() => {
     const undoneTasks = taskLists.filter(
       (task) => !task.isDone && !task.isArchived
     );
     const payload = { id: undoneTasks[0].id };
     taskDispatch(actions.setCurrentTask(payload));
-  };
-
-  const handleDoneTask = () => {
-    const payload = { id: currentId, isDone: true };
-    handleTaskUpdate(payload);
-    selectNextTask();
-  };
+  }, [isDone]);
 
   return (
     <div className={`${ROOT_CLASS}__modal-timer`}>
@@ -84,7 +84,7 @@ function ModalTimer() {
           handleBreak={handleBreak}
           handleWorkTIme={handleWorkTIme}
           handleBreakTIme={handleBreakTIme}
-          handleTaskUpdate={handleDoneTask}
+          handleTaskUpdate={handleTaskUpdate}
         />
       </div>
       <Button
