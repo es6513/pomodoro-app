@@ -8,10 +8,9 @@ export const addTask = (payload) => {
   };
 };
 
-export const updateTaskState = (id, payload) => {
+export const updateTaskState = (payload) => {
   return {
     type: actionTypes.UPDATE_TASK_STATE,
-    id,
     payload,
   };
 };

@@ -12,9 +12,9 @@ const reducer = (state, action) => {
       };
     }
     case actionTypes.UPDATE_TASK_STATE: {
-      const { id, ...updateKey } = action.paylod;
+      const { id, ...updateKey } = action.payload;
       const updatedTaskLists = state.taskLists.map((task) => {
-        if (task.id === id) return { ...task, updateKey };
+        if (task.id === id) return { ...task, ...updateKey };
         return task;
       });
       return {

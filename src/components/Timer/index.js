@@ -74,7 +74,7 @@ function Timer({
         handleBreak({ id, isBreak: true });
         handleWorkTIme({ id, workTime: 0 });
         handleTaskUpdate({ id, finishTomato: finishTomato + 1 });
-      } else if (isBreak && !timeOut) {
+      } else if (isBreak && timeOut) {
         handleCountDown(false);
         handleBreak({ id, isBreak: false });
         handleBreakTIme({ id, breakTime: 0 });
@@ -181,7 +181,7 @@ function Timer({
           type="button"
           className={`${ROOT_CLASS}__timer-button`}
           handleCLick={resetTimer}
-          disabled={isCountDown || workTime === 0}
+          disabled={isCountDown || (isBreak ? breakTime === 0 : workTime === 0)}
         >
           <img
             src={Reset}

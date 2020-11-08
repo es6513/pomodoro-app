@@ -61,6 +61,7 @@ function ModalTimer() {
     taskDispatch(actions.updateTaskState(currentId, payload));
   };
   const handleTaskUpdate = (payload) => {
+    console.log("beforeDispatch", payload);
     taskDispatch(actions.updateTaskState(payload));
   };
 
