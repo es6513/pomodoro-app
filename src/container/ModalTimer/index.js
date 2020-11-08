@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import { config } from "../../config";
 import { TaskListContext } from "../../context";
 import actions from "../../context/taskLists/actions";
 import HeadTitle from "../../components/HeadTitle";
 import Timer from "../../components/Timer";
+import Button from "../../components/Button";
 
 const { css } = config;
 const { ROOT_CLASS } = css;
@@ -17,18 +18,11 @@ function ModalTimer() {
     taskDispatch,
   } = useContext(TaskListContext);
 
-  console.log(currentId);
-
   //show Task
 
   const getShowTask = () => {
     if (currentId) return taskLists.find((task) => task.id === currentId);
-    else {
-      const undoenTasks = taskLists.filter(
-        (task) => !task.isDone && !task.isArchived
-      );
-      return undoenTasks.length > 0 ? undoenTasks[0] : null;
-    }
+    return null;
   };
 
   const showedTask = getShowTask();
@@ -56,13 +50,24 @@ function ModalTimer() {
     taskDispatch(actions.setBreakTime(payload));
   };
 
-  const handleUpdateTask = () => {
-    const payload = { isDone: true };
-    taskDispatch(actions.updateTaskState(currentId, payload));
-  };
   const handleTaskUpdate = (payload) => {
-    console.log("beforeDispatch", payload);
+    console.log("done task");
     taskDispatch(actions.updateTaskState(payload));
+  };
+
+  const selectNextTask = () => {
+    console.log(taskLists);
+    const undoneTasks = taskLists.filter(
+      (task) => !task.isDone && !task.isArchived
+    );
+    const payload = { id: undoneTasks[0].id };
+    taskDispatch(actions.setCurrentTask(payload));
+  };
+
+  const handleDoneTask = () => {
+    const payload = { id: currentId, isDone: true };
+    handleTaskUpdate(payload);
+    selectNextTask();
   };
 
   return (
@@ -79,15 +84,19 @@ function ModalTimer() {
           handleBreak={handleBreak}
           handleWorkTIme={handleWorkTIme}
           handleBreakTIme={handleBreakTIme}
-          handleTaskUpdate={handleTaskUpdate}
+          handleTaskUpdate={handleDoneTask}
         />
       </div>
+      <Button
+        type="button"
+        className={`${ROOT_CLASS}__undone-button`}
+        disabled={isCountDown}
+        handleCLick={handleDoneTask}
+      >
+        TASK COMPLETE
+      </Button>
 
-      {/* {currentTask ? (
-        <button type="button" onClick={handleUpdateTask}>
-          Done
-        </button>
-      ) : null} */}
+      <footer>POMODORO</footer>
     </div>
   );
 }

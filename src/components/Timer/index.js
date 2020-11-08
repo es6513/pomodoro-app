@@ -31,8 +31,11 @@ function Timer({
   } = task;
 
   //handle time appear
+  const circleRadius = 120;
+  const circlePerimeter = Math.round(circleRadius * 2 * 3.1415);
+
   const handleTimePercentage = (time, unitTime) => {
-    return Math.round((time / unitTime) * (1500 / 2));
+    return Math.round((time / unitTime) * circlePerimeter);
   };
   const handleRemainTime = (remainTime) => {
     const date = new Date(0);
@@ -62,6 +65,7 @@ function Timer({
   useEffect(() => {
     if (isCountDown) {
       if (!isBreak && !timeOut) {
+        console.log("here");
         timeoutId.current = setTimeout(() => {
           handleWorkTIme({ id, workTime: workTime + 1 });
         }, 1000);
@@ -89,13 +93,13 @@ function Timer({
     isBreak,
     isCountDown,
     workTime,
-    handleWorkTIme,
-    timeOut,
     breakTime,
+    finishTomato,
+    timeOut,
+    handleWorkTIme,
     handleBreak,
     handleBreakTIme,
     handleCountDown,
-    finishTomato,
     handleTaskUpdate,
   ]);
 
@@ -114,7 +118,7 @@ function Timer({
       handleWorkTIme({ id, workTime: 0 });
     }
   };
-
+  console.log(percentage);
   return (
     <div className={className}>
       <div className={`${ROOT_CLASS}__timer-clock`}>
@@ -122,7 +126,7 @@ function Timer({
           <circle
             cx="175"
             cy="150"
-            r="119"
+            r="120"
             fill="#fcfcfc"
             stroke={isBreak ? "#b5e254" : "#acacac"}
             strokeWidth="40"
@@ -130,7 +134,7 @@ function Timer({
           <circle
             cx="175"
             cy="150"
-            r="119"
+            r="120"
             fill="none"
             stroke={isBreak ? "#acacac" : "#ea5548"}
             strokeWidth="40"
