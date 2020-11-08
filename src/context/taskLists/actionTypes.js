@@ -1,7 +1,23 @@
+//task
 const ADD_TASK = "ADD_TASK";
 const UPDATE_TASK_STATE = "UPDATE_TASK_STATE";
 const SET_CURRENT_TASK = "SET_CURRENT_TASK";
 
-const actactionTypesions = { ADD_TASK, UPDATE_TASK_STATE, SET_CURRENT_TASK };
+//timer
+
+const SET_IS_COUNT_DOWN = "SET_COUNT_DOWN";
+const SET_IS_BREAK = "SET_IS_BREAK";
+const SET_WORK_TIME = "SET_WORK_TIME";
+const SET_BREAK_TIME = "SET_BREAK_TIME";
+
+const actactionTypesions = {
+  ADD_TASK,
+  UPDATE_TASK_STATE,
+  SET_CURRENT_TASK,
+  SET_IS_COUNT_DOWN,
+  SET_IS_BREAK,
+  SET_WORK_TIME,
+  SET_BREAK_TIME,
+};
 
 export default actactionTypesions;

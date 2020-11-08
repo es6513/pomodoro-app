@@ -1,6 +1,5 @@
-import React, { use } from "react";
+import React, { useEffect, useRef } from "react";
 import { PropTypes } from "prop-types";
-import { TaskListContext } from "../../context";
 import { timeConstants } from "../../context/taskLists/utils";
 import { config } from "../../config";
 
@@ -12,9 +11,10 @@ import Reset from "../../assets/icons/reset_gray.svg";
 const { css } = config;
 const { ROOT_CLASS } = css;
 
-function Timer({ task, className }) {
+function Timer({ task, isCountDown, className }) {
   const { workTime, breakTime, isBreak, estimatedWorkTime } = task;
 
+  //handle time appear
   const handleTimePercentage = (time, unitTime) => {
     return Math.round((time / unitTime) * (1500 / 2));
   };
@@ -34,6 +34,16 @@ function Timer({ task, className }) {
   const percentage = isBreak
     ? handleTimePercentage(breakTime, timeConstants.oneUnitBreakSeconds)
     : handleTimePercentage(workTime, timeConstants.oneUnitWorkSeconds);
+
+  //handle side effect
+  const timeoutId = useRef(null);
+
+  // useEffect(() => {
+  //   effect;
+  //   return () => {
+  //     clearTimeout(timeoutId.current);
+  //   };
+  // }, []);
 
   return (
     <div className={className}>
@@ -110,4 +120,9 @@ export default Timer;
 Timer.propTypes = {
   task: PropTypes.object.isRequired,
   className: PropTypes.string.isRequired,
+  isCountDown: PropTypes.bool.isRequired,
+  handleCountDown: PropTypes.func.isRequired,
+  handleBreak: PropTypes.func.isRequired,
+  handleWorkTIme: PropTypes.func.isRequired,
+  handleBreakTIme: PropTypes.func.isRequired,
 };

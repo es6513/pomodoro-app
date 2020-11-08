@@ -12,7 +12,7 @@ function ModalTimer() {
   const {
     taskState: {
       taskLists,
-      timer: { currentId },
+      timer: { currentId, isCountDown },
     },
     taskDispatch,
   } = useContext(TaskListContext);
@@ -33,11 +33,33 @@ function ModalTimer() {
 
   const showedTask = getShowTask();
 
-  //handleTime
+  //handleUpdateTask
 
   const handleUpdateTask = () => {
     const payload = { isDone: true };
     taskDispatch(actions.updateTaskState(currentId, payload));
+  };
+
+  //handleTimerBehavior
+
+  const handleCountDown = (isCountDown) => {
+    const payload = { isCountDown };
+    taskDispatch(actions.setIsCountDown(payload));
+  };
+
+  const handleBreak = (isBreak) => {
+    const payload = { isBreak };
+    taskDispatch(actions.setIsBreak(payload));
+  };
+
+  const handleWorkTIme = (id, workTIme) => {
+    const payload = { id, workTIme };
+    taskDispatch(actions.setWorkTime(payload));
+  };
+
+  const handleBreakTIme = (id, breakTime) => {
+    const payload = { id, breakTime };
+    taskDispatch(actions.setBreakTime(payload));
   };
 
   return (
@@ -49,6 +71,11 @@ function ModalTimer() {
         <Timer
           task={showedTask}
           className={`${ROOT_CLASS}__modal-timer__timer`}
+          isCountDown={isCountDown}
+          handleCountDown={handleCountDown}
+          handleBreak={handleBreak}
+          handleWorkTIme={handleWorkTIme}
+          handleBreakTIme={handleBreakTIme}
         />
       </div>
 

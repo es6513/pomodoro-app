@@ -29,6 +29,46 @@ const reducer = (state, action) => {
         timer: { ...state.timer, currentId: id },
       };
     }
+    case actionTypes.SET_IS_COUNT_DOWN: {
+      const { isCountDown } = action.payload;
+      return {
+        ...state,
+        timer: { ...state.timer, isCountDown },
+      };
+    }
+    case actionTypes.SET_IS_BREAK: {
+      const { id, isBreak } = action.payload;
+      const updatedTaskLists = state.taskLists.map((task) => {
+        if (task.id === id) return { ...task, isBreak };
+        return task;
+      });
+      return {
+        ...state,
+        taskLists: updatedTaskLists,
+      };
+    }
+    case actionTypes.SET_WORK_TIME: {
+      const { id, workTime } = action.payload;
+      const updatedTaskLists = state.taskLists.map((task) => {
+        if (task.id === id) return { ...task, workTime };
+        return task;
+      });
+      return {
+        ...state,
+        taskLists: updatedTaskLists,
+      };
+    }
+    case actionTypes.SET_BREAK_TIME: {
+      const { id, breakTime } = action.payload;
+      const updatedTaskLists = state.taskLists.map((task) => {
+        if (task.id === id) return { ...task, breakTime };
+        return task;
+      });
+      return {
+        ...state,
+        taskLists: updatedTaskLists,
+      };
+    }
     default:
       return state;
   }
