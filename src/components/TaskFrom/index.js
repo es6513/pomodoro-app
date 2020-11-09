@@ -15,6 +15,7 @@ function TaskForm({
   defaultValues,
   handleSubmit,
   handleArchiveLightBox,
+  disableArchive,
   isCountDown,
   location,
 }) {
@@ -97,7 +98,7 @@ function TaskForm({
             data-color="gray"
             data-radius="general"
             type="button"
-            disabled={isCountDown}
+            disabled={disableArchive}
             className={`${ROOT_CLASS}__form-button`}
             handleClick={() => handleArchiveLightBox()}
           >
@@ -126,6 +127,7 @@ TaskForm.propTypes = {
   defaultValues: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   handleArchiveLightBox: PropTypes.func,
+  disableArchive: PropTypes.bool.isRequired,
   isCountDown: PropTypes.bool,
   location: PropTypes.object.isRequired,
 };
