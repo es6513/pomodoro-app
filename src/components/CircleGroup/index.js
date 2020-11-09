@@ -20,7 +20,6 @@ function CircleGroup({
   const { workTime } = task;
 
   const percentage = workTime / timeConstants.oneUnitWorkSeconds;
-  console.log(percentage);
 
   const renderCircle = () => {
     if (estimatedTomato > finishTomato) {
