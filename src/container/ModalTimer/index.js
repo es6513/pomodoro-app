@@ -96,16 +96,15 @@ function ModalTimer() {
               handleBreakTIme={handleBreakTIme}
               handleUpdateTask={handleUpdateTask}
             />
-            <div className={`${ROOT_CLASS}__undone-button-group`}>
+            <Button
+              type="button"
+              disabled={isCountDown}
+              handleClick={handleDoneTask}
+              className={`${ROOT_CLASS}__undone-button`}
+            >
+              TASK COMPLETE
               <img alt="complete" src={Complete} />
-              <Button
-                type="button"
-                disabled={isCountDown}
-                handleClick={handleDoneTask}
-              >
-                TASK COMPLETE
-              </Button>
-            </div>
+            </Button>
           </div>
         </div>
       );

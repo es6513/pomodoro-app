@@ -36,16 +36,18 @@ $_modal-timer: #{$root-class}__modal-timer;
       margin-bottom: 1 *$font-basis;
     }
 
-    #{$root-class}__undone-button-group{
+    #{$root-class}__undone-button{
       display: flex;
+      background-color: transparent;
       align-items: center;
       margin-top: 2 * $font-basis;
-      button{
-        background-color: transparent;
-      }
+      position: relative;
+      
       img{
         width: 1 * $font-basis;
         height: 1 * $font-basis;
+        position: absolute;
+        left: -1 * $font-basis;
       }
     }
 
@@ -58,24 +60,25 @@ $_modal-timer: #{$root-class}__modal-timer;
       img{
         width: 15 * $font-basis;
         height: 15 * $font-basis;
-       }
+      
+      }
 
-       h2{
+      h2{
         position: absolute;
         font-size: 1.2 * $font-basis;
         letter-spacing: 0.1* $font-basis;
         color: $white;
-       }
+      }
     }
      
 
-     &__empty-text{
+    &__empty-text{
       text-align: center;
       font-size: 0.9 * $font-basis;
       letter-spacing: 0.1* $font-basis;
       line-height: 1.5;
       margin-top: 4 * $font-basis;
-     }
+    }
 
      //footer
 
