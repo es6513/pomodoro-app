@@ -19,12 +19,12 @@ const { ROOT_CLASS } = css;
 
 const slideNavs = [
   {
-    path: "/add",
+    path: "/pomodoro-app/add",
     iconComponent: Icons.AddWhite,
     component: NewTask,
   },
   {
-    path: "/todo",
+    path: "/pomodoro-app/todo",
     iconComponent: Icons.ListWhite,
     component: TaskLists,
   },
