@@ -20,9 +20,9 @@ mockInitialState.taskLists = mockInitialState.taskLists.map((el, index) => {
     taskTitle: "Task" + String(index + 1),
     estimatedTomato: index + 1,
     estimatedWorkTime: (index + 1) * timeConstants.oneUnitWorkSeconds,
-    workTime: index === 3 ? 1498 : 0,
-    breakTime: index === 3 ? 298 : 0,
-    finishTomato: index === 3 ? 5 : 0,
+    workTime: 0,
+    breakTime: 0,
+    finishTomato: index === 3 ? 2 : 0,
   };
   return task;
 });

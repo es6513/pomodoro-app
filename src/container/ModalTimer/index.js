@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { config } from "../../config";
 import { TaskListContext } from "../../context";
 import actions from "../../context/taskLists/actions";
