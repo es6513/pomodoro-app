@@ -117,7 +117,6 @@ function Timer({
       handleWorkTIme({ id, workTime: 0 });
     }
   };
-  console.log(percentage);
   return (
     <div className={className}>
       <div className={`${ROOT_CLASS}__timer-clock`}>

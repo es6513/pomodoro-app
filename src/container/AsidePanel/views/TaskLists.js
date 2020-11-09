@@ -130,6 +130,9 @@ function TaskLists() {
               data-radius="general"
               type="button"
               className={`${ROOT_CLASS}__form-button`}
+              handleClick={() =>
+                handleUpdateTask({ id: task.id, isArchived: true })
+              }
             >
               ARCHIVE
             </Button>

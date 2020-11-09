@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { config } from "../../config";
 import { TaskListContext } from "../../context";
 import actions from "../../context/taskLists/actions";
@@ -29,7 +29,8 @@ function ModalTimer() {
 
   //handleUpdateTask
 
-  const { isDone } = showedTask;
+  const { isDone, isBreak, isArchived } = showedTask;
+  const [localTask, setLocalTask] = useState(showedTask);
 
   useEffect(() => {
     const undoneTasks = taskLists.filter(
@@ -37,7 +38,7 @@ function ModalTimer() {
     );
     const payload = { id: undoneTasks[0].id };
     taskDispatch(actions.setCurrentTask(payload));
-  }, [isDone]);
+  }, [isDone, isArchived]);
   //handleTimerBehavior
 
   const handleCountDown = (isCountDown) => {
@@ -64,6 +65,7 @@ function ModalTimer() {
   const handleDoneTask = () => {
     const payload = { id: currentId, isDone: true };
     handleUpdateTask(payload);
+    console.log(taskLists);
   };
 
   return (
@@ -71,6 +73,9 @@ function ModalTimer() {
       <div className={`${ROOT_CLASS}__modal-timer__content`}>
         {showedTask ? (
           <HeadTitle headTag="h1">{showedTask.taskTitle}</HeadTitle>
+        ) : null}
+        {isBreak ? (
+          <div className={`${ROOT_CLASS}__modal-timer__break-label`}>BREAK</div>
         ) : null}
         <Timer
           task={showedTask}
