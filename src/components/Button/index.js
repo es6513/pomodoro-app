@@ -1,9 +1,9 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 
-function Button({ className, children, handleCLick, ...restProps }) {
+function Button({ className, children, handleClick, ...restProps }) {
   return (
-    <button className={className} onClick={handleCLick} {...restProps}>
+    <button className={className} onClick={handleClick} {...restProps}>
       {children}
     </button>
   );
@@ -13,11 +13,11 @@ export default Button;
 
 Button.propTypes = {
   className: PropTypes.string,
-  handleCLick: PropTypes.func,
+  handleClick: PropTypes.func,
   children: PropTypes.any.isRequired,
 };
 
 Button.defaultProps = {
   className: "",
-  handleCLick: () => null,
+  handleClick: () => null,
 };

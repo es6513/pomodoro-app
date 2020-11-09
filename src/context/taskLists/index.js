@@ -5,7 +5,6 @@ import actionTypes from "./actionTypes";
 
 const reducer = (state, action) => {
   console.log(action.type);
-  console.log(action.payload);
   switch (action.type) {
     case actionTypes.ADD_TASK: {
       return {
@@ -14,6 +13,7 @@ const reducer = (state, action) => {
       };
     }
     case actionTypes.UPDATE_TASK_STATE: {
+      console.log(action.payload);
       const { id, ...updateKey } = action.payload;
       const updatedTaskLists = state.taskLists.map((task) => {
         if (task.id === id) return { ...task, ...updateKey };

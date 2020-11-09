@@ -51,11 +51,15 @@ function TaskLists() {
 
   //handle from
 
-  const onSubmit = (formData, e, resetForm) => {
-    console.log(formData);
+  const handleSubmit = (formData, e, resetForm) => {
     const payload = { ...formData };
     taskDispatch(actions.updateTaskState(currentId, payload));
     resetForm(formData, { isDirty: false });
+  };
+
+  const handleUpdateTask = (updateData) => {
+    const payload = { id: currentId, ...updateData };
+    taskDispatch(actions.updateTaskState(payload));
   };
 
   //handleVisibleTasks
@@ -94,7 +98,8 @@ function TaskLists() {
 
   //HandleSelectTask
   const handleSelectTask = (id) => {
-    if (isCountDown) return;
+    if (isCountDown || filter === "SHOW_DONE" || filter === "SHOW_ARCHIVE")
+      return;
     const payload = { id };
     taskDispatch(actions.setCurrentTask(payload));
   };
@@ -111,7 +116,9 @@ function TaskLists() {
               taskTitle: task.taskTitle,
               estimatedTomato: task.estimatedTomato,
             }}
-            handleSubmit={onSubmit}
+            handleSubmit={handleSubmit}
+            isCountDown={isCountDown}
+            handleUpdateTask={handleUpdateTask}
           />
         );
       case "SHOW_DONE":
@@ -132,6 +139,9 @@ function TaskLists() {
               data-radius="general"
               type="submit"
               className={`${ROOT_CLASS}__form-button`}
+              handleClick={() =>
+                handleUpdateTask({ id: task.id, isDone: false })
+              }
             >
               REDO
             </Button>
@@ -146,8 +156,11 @@ function TaskLists() {
               data-radius="general"
               type="button"
               className={`${ROOT_CLASS}__form-button`}
+              handleClick={() =>
+                handleUpdateTask({ id: task.id, isArchived: false })
+              }
             >
-              ARCHIVE
+              UNARCHIVE
             </Button>
           </div>
         );
@@ -168,7 +181,7 @@ function TaskLists() {
             data-color={nav.filter === filter ? "primary" : "gray-nav"}
             data-radius="upper"
             className={`${ROOT_CLASS}__task-lists__switch-nav-item`}
-            handleCLick={() => handleSwitchFilter(nav.filter)}
+            handleClick={() => handleSwitchFilter(nav.filter)}
           >
             {nav.label}
           </Button>

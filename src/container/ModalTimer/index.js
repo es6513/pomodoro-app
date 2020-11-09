@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from "react";
+import React, { useContext, useEffect } from "react";
 import { config } from "../../config";
 import { TaskListContext } from "../../context";
 import actions from "../../context/taskLists/actions";
@@ -29,9 +29,16 @@ function ModalTimer() {
 
   //handleUpdateTask
 
-  //handleTimerBehavior
+  const { isDone } = showedTask;
 
-  console.log(actions);
+  useEffect(() => {
+    const undoneTasks = taskLists.filter(
+      (task) => !task.isDone && !task.isArchived
+    );
+    const payload = { id: undoneTasks[0].id };
+    taskDispatch(actions.setCurrentTask(payload));
+  }, [isDone]);
+  //handleTimerBehavior
 
   const handleCountDown = (isCountDown) => {
     const payload = { isCountDown };
@@ -50,25 +57,14 @@ function ModalTimer() {
     taskDispatch(actions.setBreakTime(payload));
   };
 
-  const handleTaskUpdate = (payload) => {
-    console.log("done task");
+  const handleUpdateTask = (payload) => {
     taskDispatch(actions.updateTaskState(payload));
   };
 
   const handleDoneTask = () => {
     const payload = { id: currentId, isDone: true };
-    handleTaskUpdate(payload);
+    handleUpdateTask(payload);
   };
-
-  const { isDone } = showedTask;
-
-  useEffect(() => {
-    const undoneTasks = taskLists.filter(
-      (task) => !task.isDone && !task.isArchived
-    );
-    const payload = { id: undoneTasks[0].id };
-    taskDispatch(actions.setCurrentTask(payload));
-  }, [isDone]);
 
   return (
     <div className={`${ROOT_CLASS}__modal-timer`}>
@@ -84,14 +80,14 @@ function ModalTimer() {
           handleBreak={handleBreak}
           handleWorkTIme={handleWorkTIme}
           handleBreakTIme={handleBreakTIme}
-          handleTaskUpdate={handleTaskUpdate}
+          handleUpdateTask={handleUpdateTask}
         />
       </div>
       <Button
         type="button"
         className={`${ROOT_CLASS}__undone-button`}
         disabled={isCountDown}
-        handleCLick={handleDoneTask}
+        handleClick={handleDoneTask}
       >
         TASK COMPLETE
       </Button>

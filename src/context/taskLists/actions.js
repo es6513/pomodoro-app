@@ -9,6 +9,7 @@ export const addTask = (payload) => {
 };
 
 export const updateTaskState = (payload) => {
+  console.log(payload);
   return {
     type: actionTypes.UPDATE_TASK_STATE,
     payload,

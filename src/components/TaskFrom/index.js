@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { PropTypes } from "prop-types";
 import { useForm, Controller } from "react-hook-form";
 import { config } from "../../config";
+import { TaskListContext } from "../../context";
+import actions from "../../context/taskLists/actions";
 import TomatoRate from "../TomatoRate";
 import Input from "../Input";
 import Button from "../Button";
@@ -10,7 +12,14 @@ import { withRouter } from "react-router";
 const { css } = config;
 const { ROOT_CLASS } = css;
 
-function TaskForm({ className, defaultValues, handleSubmit, location }) {
+function TaskForm({
+  className,
+  defaultValues,
+  handleSubmit,
+  handleUpdateTask,
+  isCountDown,
+  location,
+}) {
   const {
     register: formRegister,
     errors: formErrors,
@@ -86,7 +95,9 @@ function TaskForm({ className, defaultValues, handleSubmit, location }) {
             data-color="gray"
             data-radius="general"
             type="button"
+            disabled={isCountDown}
             className={`${ROOT_CLASS}__form-button`}
+            handleClick={() => handleUpdateTask({ isArchived: true })}
           >
             ARCHIVE
           </Button>
@@ -95,7 +106,7 @@ function TaskForm({ className, defaultValues, handleSubmit, location }) {
             data-color="primary"
             data-radius="general"
             type="submit"
-            disabled={buttonDisabled()}
+            disabled={buttonDisabled() || isCountDown}
             className={`${ROOT_CLASS}__form-button`}
           >
             SAVE
@@ -112,9 +123,13 @@ TaskForm.propTypes = {
   className: PropTypes.string,
   defaultValues: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  handleUpdateTask: PropTypes.func,
+  isCountDown: PropTypes.bool,
   location: PropTypes.object.isRequired,
 };
 
 TaskForm.defaultProps = {
   className: "",
+  handleUpdateTask: () => null,
+  isCountDown: false,
 };

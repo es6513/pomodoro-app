@@ -19,7 +19,7 @@ function Timer({
   handleBreak,
   handleWorkTIme,
   handleBreakTIme,
-  handleTaskUpdate,
+  handleUpdateTask,
 }) {
   const {
     id,
@@ -65,7 +65,6 @@ function Timer({
   useEffect(() => {
     if (isCountDown) {
       if (!isBreak && !timeOut) {
-        console.log("here");
         timeoutId.current = setTimeout(() => {
           handleWorkTIme({ id, workTime: workTime + 1 });
         }, 1000);
@@ -74,11 +73,10 @@ function Timer({
           handleBreakTIme({ id, breakTime: breakTime + 1 });
         }, 1000);
       } else if (!isBreak && timeOut) {
-        console.log("here");
         handleCountDown(false);
         handleBreak({ id, isBreak: true });
         handleWorkTIme({ id, workTime: 0 });
-        handleTaskUpdate({ id, finishTomato: finishTomato + 1 });
+        handleUpdateTask({ id, finishTomato: finishTomato + 1 });
       } else if (isBreak && timeOut) {
         handleCountDown(false);
         handleBreak({ id, isBreak: false });
@@ -101,7 +99,7 @@ function Timer({
     handleBreak,
     handleBreakTIme,
     handleCountDown,
-    handleTaskUpdate,
+    handleUpdateTask,
   ]);
 
   const startTimer = () => {
@@ -155,7 +153,7 @@ function Timer({
           data-after="START"
           type="button"
           className={`${ROOT_CLASS}__timer-button`}
-          handleCLick={startTimer}
+          handleClick={startTimer}
           disabled={isCountDown}
         >
           <img
@@ -170,7 +168,7 @@ function Timer({
           data-after="PAUSE"
           type="button"
           className={`${ROOT_CLASS}__timer-button`}
-          handleCLick={pauseTimer}
+          handleClick={pauseTimer}
           disabled={!isCountDown}
         >
           <img
@@ -185,7 +183,7 @@ function Timer({
           data-after="RESET"
           type="button"
           className={`${ROOT_CLASS}__timer-button`}
-          handleCLick={resetTimer}
+          handleClick={resetTimer}
           disabled={isCountDown || (isBreak ? breakTime === 0 : workTime === 0)}
         >
           <img
@@ -209,5 +207,5 @@ Timer.propTypes = {
   handleBreak: PropTypes.func.isRequired,
   handleWorkTIme: PropTypes.func.isRequired,
   handleBreakTIme: PropTypes.func.isRequired,
-  handleTaskUpdate: PropTypes.func.isRequired,
+  handleUpdateTask: PropTypes.func.isRequired,
 };
