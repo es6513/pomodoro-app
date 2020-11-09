@@ -69,8 +69,8 @@ function TaskLists() {
 
   //handle from
 
-  const handleSubmit = (formData, e, resetForm) => {
-    const payload = { id: currentId, ...formData };
+  const handleSubmit = (id, formData, e, resetForm) => {
+    const payload = { id: id, ...formData };
     taskDispatch(actions.updateTaskState(payload));
     resetForm(formData, { isDirty: false });
   };
@@ -166,9 +166,10 @@ function TaskLists() {
               taskTitle: task.taskTitle,
               estimatedTomato: task.estimatedTomato,
             }}
-            handleSubmit={handleSubmit}
+            handleSubmit={handleSubmit.bind(null, task.id)}
             isCountDown={isCountDown}
             disableArchive={isCountDown && task.id === currentId}
+            disableSubmit={isCountDown && task.id === currentId}
             handleArchiveLightBox={() => handleOpenLightBox(task.id)}
           />
         );

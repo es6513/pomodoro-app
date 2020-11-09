@@ -12,11 +12,11 @@ const { ROOT_CLASS } = css;
 
 function TaskForm({
   className,
-  defaultValues,
-  handleSubmit,
   handleArchiveLightBox,
   disableArchive,
-  isCountDown,
+  disableSubmit,
+  defaultValues,
+  handleSubmit,
   location,
 }) {
   const {
@@ -36,11 +36,13 @@ function TaskForm({
 
   const { isValid: formIsValid } = formState;
 
-  const buttonDisabled = () => {
+  const submitButtonDisabled = () => {
     if (page === "add") return !formIsValid;
     else {
       const { dirtyFields } = formState;
-      return Object.keys(dirtyFields).length === 0;
+      const isFormDirty = Object.keys(dirtyFields).length === 0;
+
+      return isFormDirty || !formIsValid || disableSubmit;
     }
   };
 
@@ -87,7 +89,7 @@ function TaskForm({
           data-radius="general"
           data-layout="full"
           type="submit"
-          disabled={buttonDisabled()}
+          disabled={submitButtonDisabled()}
         >
           ADD TASK
         </Button>
@@ -109,7 +111,7 @@ function TaskForm({
             data-color="primary"
             data-radius="general"
             type="submit"
-            disabled={buttonDisabled() || isCountDown || !formIsValid}
+            disabled={submitButtonDisabled()}
             className={`${ROOT_CLASS}__form-button`}
           >
             SAVE
@@ -124,16 +126,18 @@ export default withRouter(TaskForm);
 
 TaskForm.propTypes = {
   className: PropTypes.string,
-  defaultValues: PropTypes.object.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
   handleArchiveLightBox: PropTypes.func,
   disableArchive: PropTypes.bool,
-  isCountDown: PropTypes.bool,
+  disableSubmit: PropTypes.bool,
+  defaultValues: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired,
 };
 
 TaskForm.defaultProps = {
   className: "",
-  handleUpdateTask: () => null,
+  handleArchiveLightBox: () => null,
+  disableArchive: false,
+  disableSubmit: false,
   isCountDown: false,
 };
