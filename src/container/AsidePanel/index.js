@@ -6,7 +6,7 @@ import MenuLink from "../../components/MenuLink";
 import NewTask from "./views/NewTask";
 import TaskLists from "./views/TaskLists";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Redirect,
@@ -19,12 +19,12 @@ const { ROOT_CLASS } = css;
 
 const slideNavs = [
   {
-    path: "/pomodoro-app/add",
+    path: "/add",
     iconComponent: Icons.AddWhite,
     component: NewTask,
   },
   {
-    path: "/pomodoro-app/todo",
+    path: "/todo",
     iconComponent: Icons.ListWhite,
     component: TaskLists,
   },

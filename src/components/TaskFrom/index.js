@@ -31,7 +31,7 @@ function TaskForm({
     defaultValues,
   });
 
-  const page = location.pathname === "/pomodoro-app/add" ? "add" : "todo";
+  const page = location.pathname === "/add" ? "add" : "todo";
 
   const { isValid: formIsValid } = formState;
 
