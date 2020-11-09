@@ -88,9 +88,10 @@ function ModalTimer() {
           ) : (
             <div className={`${ROOT_CLASS}__modal-timer__circle`}>
               <CircleGroup
-                data-size="big"
+                dataSize="big"
                 estimatedTomato={showedTask.estimatedTomato}
                 finishTomato={showedTask.finishTomato}
+                task={showedTask}
               />
             </div>
           )}

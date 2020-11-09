@@ -237,6 +237,7 @@ function TaskLists() {
                 data-size="small"
                 estimatedTomato={task.estimatedTomato}
                 finishTomato={task.finishTomato}
+                task={task}
               />
             </TaskInfo>
             <div className={getTaskDetailClassName(index)}>
