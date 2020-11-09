@@ -1,0 +1,70 @@
+
+$_light-box-component: #{$root-class}__light-box;
+
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+#{$_light-box-component}{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; 
+  height: 100%; 
+  position: fixed;
+  left: 0;
+  top: 0;
+  outline: none;
+  z-index: 1000; 
+  background-color: rgba(0,0,0,0.4);
+  color: $black;
+  overflow: auto; 
+
+  .light-box-header{
+    display: flex;
+    justify-content: center;
+    font-size: 1.5 * $font-basis;
+    font-weight: 800;
+    padding: 1.5 * $font-basis;
+  }
+
+  .light-box-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 1.5 * $font-basis;
+    width: 40 * $font-basis;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 0.5 * $font-basis;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+  }
+
+  .light-box-body{
+    display: flex;
+    justify-content: center;
+    padding: 2 * $font-basis;
+  }
+
+  .light-box-button-group{
+    display: flex;
+    justify-content: center;
+    padding: 1.5 * $font-basis;
+
+    button{
+      flex-grow: 1;
+
+      &:nth-child(1){
+        flex-grow: 1;
+        margin-left: 1 * $font-basis;
+      }
+      &:nth-child(2){
+        flex-grow: 2;
+        margin-left: 1 * $font-basis;
+      }
+    }
+  }
+
+}

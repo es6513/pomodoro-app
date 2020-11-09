@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import classNames from "classnames";
+import withAsideLayout from "../../../hoc/withAsideLayout";
 import { TaskListContext } from "../../../context";
 import actions from "../../../context/taskLists/actions";
 import { config } from "../../../config";
@@ -7,8 +8,8 @@ import HeadTitle from "../../../components/HeadTitle";
 import Button from "../../../components/Button";
 import CircleGroup from "../../../components/CircleGroup";
 import TaskFrom from "../../../components/TaskFrom";
-import withAsideLayout from "../../../hoc/withAsideLayout";
 import TaskInfo from "../../../components/TaskInfo";
+import ArchiveLightBox from "../../../components/LightBox";
 
 const { css } = config;
 const { ROOT_CLASS } = css;
@@ -49,6 +50,10 @@ function TaskLists() {
     },
     taskDispatch,
   } = useContext(TaskListContext);
+
+  //LightBox
+
+  const [isLightBoxOpen, setLightBox] = useState(false);
 
   //handle from
 
@@ -161,7 +166,7 @@ function TaskLists() {
               data-radius="general"
               type="button"
               className={`${ROOT_CLASS}__form-button`}
-              handleClick={() => handleArchive(task.id)}
+              handleClick={() => setLightBox(true)}
             >
               ARCHIVE
             </Button>
@@ -248,6 +253,13 @@ function TaskLists() {
           </div>
         ))}
       </div>
+      {isLightBoxOpen ? (
+        <ArchiveLightBox
+          className={`${ROOT_CLASS}__light-box`}
+          handleConfirm={() => null}
+          handleClose={() => setLightBox(false)}
+        />
+      ) : null}
     </div>
   );
 }
