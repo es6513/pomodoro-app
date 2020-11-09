@@ -21,14 +21,7 @@ function Timer({
   handleBreakTIme,
   handleUpdateTask,
 }) {
-  const {
-    id,
-    workTime,
-    breakTime,
-    isBreak,
-    estimatedWorkTime,
-    finishTomato,
-  } = task;
+  const { id, workTime, breakTime, isBreak, finishTomato } = task;
 
   //handle time appear
   const circleRadius = 120;
@@ -119,7 +112,7 @@ function Timer({
   };
   return (
     <div className={className}>
-      <div className={`${ROOT_CLASS}__timer-clock`}>
+      <div className={`${ROOT_CLASS}__timer`}>
         <svg width="350" height="300">
           <circle
             cx="175"

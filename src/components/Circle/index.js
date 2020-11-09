@@ -1,10 +1,8 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 
-function Clock({ estimatedTomato, finishTomato, className, ...restProps }) {
-  const renderClock = () => {
-    console.log(estimatedTomato);
-
+function Circle({ estimatedTomato, finishTomato, className, ...restProps }) {
+  const renderCircle = () => {
     if (estimatedTomato > finishTomato) {
       return (
         <div>
@@ -36,17 +34,17 @@ function Clock({ estimatedTomato, finishTomato, className, ...restProps }) {
       );
     }
   };
-  return <div>{renderClock()}</div>;
+  return <div>{renderCircle()}</div>;
 }
 
-export default Clock;
+export default Circle;
 
-Clock.propTypes = {
+Circle.propTypes = {
   estimatedTomato: PropTypes.number.isRequired,
   finishTomato: PropTypes.number.isRequired,
   className: PropTypes.string,
 };
 
-Clock.defaultProps = {
+Circle.defaultProps = {
   className: "",
 };

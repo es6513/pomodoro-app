@@ -1,9 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import { PropTypes } from "prop-types";
 import { useForm, Controller } from "react-hook-form";
 import { config } from "../../config";
-import { TaskListContext } from "../../context";
-import actions from "../../context/taskLists/actions";
 import TomatoRate from "../TomatoRate";
 import Input from "../Input";
 import Button from "../Button";

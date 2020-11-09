@@ -5,20 +5,13 @@ $_modal-timer: #{$root-class}__modal-timer;
 #{$root-class}{
  
   #{$_modal-timer}{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex: auto;
-    background-color: $gray-100;
 
-    &__content{
-      display: flex;
-      align-items: center;
-      flex-direction: column;
+    //timer
+
+    #{$_modal-timer}__timer{
+      margin-top: 3 * $font-basis;
     }
     
-    //timer
     &__break-label{
       display: flex;
       color: $white;

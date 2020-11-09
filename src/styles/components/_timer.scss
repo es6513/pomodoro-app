@@ -4,16 +4,28 @@ $_modal-timer-component: #{$root-class}__modal-timer;
 
 
 #{$_modal-timer-component}{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: auto;
+  background-color: $gray-100;
 
-  #{$root-class}__timer-clock{
+
+  &__content{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+
+  #{$root-class}__timer{
     text{
       font-size: 2*$font-basis;
       font-weight: 800;
     }
   }
  
-
-
   #{$root-class}__button-group{
     display: flex;
     justify-content:space-evenly;

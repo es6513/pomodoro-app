@@ -1,12 +1,12 @@
 
-$_clock-component: #{$root-class}__clock;
+$_circle-component: #{$root-class}__circle;
 
 //size
 
 $size-themes:(
   big:(
-    width: 1 * $font-basis,
-    height: 1 * $font-basis,
+    width: 0.7 * $font-basis,
+    height: 0.7 * $font-basis,
   ),
   small:(
     width: 0.5 * $font-basis,
@@ -15,10 +15,10 @@ $size-themes:(
 );
 
 
-#{$_clock-component}{
+#{$_circle-component}{
 
   display: inline-block;
-  border: solid 1px $tomato;
+  border: solid 2px $tomato;
   border-radius: 50%;
 
   &:not(:first-child){

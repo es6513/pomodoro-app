@@ -4,7 +4,6 @@ import mockInitialState from "./mockData";
 import actionTypes from "./actionTypes";
 
 const reducer = (state, action) => {
-  console.log(action.type);
   switch (action.type) {
     case actionTypes.ADD_TASK: {
       return {
@@ -13,13 +12,11 @@ const reducer = (state, action) => {
       };
     }
     case actionTypes.UPDATE_TASK_STATE: {
-      console.log(action.payload);
       const { id, ...updateKey } = action.payload;
       const updatedTaskLists = state.taskLists.map((task) => {
         if (task.id === id) return { ...task, ...updateKey };
         return task;
       });
-      console.log("first", updatedTaskLists);
       return {
         ...state,
         taskLists: updatedTaskLists,
@@ -27,7 +24,6 @@ const reducer = (state, action) => {
     }
     case actionTypes.SET_CURRENT_TASK: {
       const { id } = action.payload;
-      console.log("second", state.taskLists);
 
       return {
         ...state,

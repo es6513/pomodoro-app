@@ -1,10 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { config } from "../../config";
 import { TaskListContext } from "../../context";
 import actions from "../../context/taskLists/actions";
 import HeadTitle from "../../components/HeadTitle";
 import Timer from "../../components/Timer";
 import Button from "../../components/Button";
+import Circle from "../../components/Circle";
 import TomatoColor from "../../assets/icons/tomato_small_color.svg";
 import Complete from "../../assets/icons/complete.svg";
 
@@ -78,34 +79,41 @@ function ModalTimer() {
   const renderContent = (showedTask) => {
     if (showedTask) {
       return (
-        <div className={`${ROOT_CLASS}__modal-timer`}>
-          <div className={`${ROOT_CLASS}__modal-timer__content`}>
-            <HeadTitle headTag="h1">{showedTask.taskTitle}</HeadTitle>
-            {showedTask.isBreak ? (
-              <div className={`${ROOT_CLASS}__modal-timer__break-label`}>
-                BREAK
-              </div>
-            ) : null}
-            <Timer
-              task={showedTask}
-              className={`${ROOT_CLASS}__modal-timer__timer`}
-              isCountDown={isCountDown}
-              handleCountDown={handleCountDown}
-              handleBreak={handleBreak}
-              handleWorkTIme={handleWorkTIme}
-              handleBreakTIme={handleBreakTIme}
-              handleUpdateTask={handleUpdateTask}
-            />
-            <Button
-              type="button"
-              disabled={isCountDown}
-              handleClick={handleDoneTask}
-              className={`${ROOT_CLASS}__undone-button`}
-            >
-              TASK COMPLETE
-              <img alt="complete" src={Complete} />
-            </Button>
-          </div>
+        <div className={`${ROOT_CLASS}__modal-timer__content`}>
+          <HeadTitle headTag="h1">{showedTask.taskTitle}</HeadTitle>
+          {showedTask.isBreak ? (
+            <div className={`${ROOT_CLASS}__modal-timer__break-label`}>
+              BREAK
+            </div>
+          ) : (
+            <div className={`${ROOT_CLASS}__modal-timer__circle`}>
+              <Circle
+                className={`${ROOT_CLASS}__circle`}
+                data-size="big"
+                estimatedTomato={showedTask.estimatedTomato}
+                finishTomato={showedTask.finishTomato}
+              />
+            </div>
+          )}
+          <Timer
+            task={showedTask}
+            className={`${ROOT_CLASS}__modal-timer__timer`}
+            isCountDown={isCountDown}
+            handleCountDown={handleCountDown}
+            handleBreak={handleBreak}
+            handleWorkTIme={handleWorkTIme}
+            handleBreakTIme={handleBreakTIme}
+            handleUpdateTask={handleUpdateTask}
+          />
+          <Button
+            type="button"
+            disabled={isCountDown}
+            handleClick={handleDoneTask}
+            className={`${ROOT_CLASS}__undone-button`}
+          >
+            TASK COMPLETE
+            <img alt="complete" src={Complete} />
+          </Button>
         </div>
       );
     } else {
