@@ -21,7 +21,7 @@ function Clock({ estimatedTomato, finishTomato, className, ...restProps }) {
           ))}
         </div>
       );
-    } else if (estimatedTomato < finishTomato) {
+    } else if (estimatedTomato <= finishTomato) {
       return (
         <div>
           {new Array(finishTomato).fill().map((el, index) => (
