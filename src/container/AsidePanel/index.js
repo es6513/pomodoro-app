@@ -87,7 +87,7 @@ function AsidePanel() {
             ))}
             <Redirect replace to={slideNavs[0].path} />
 
-            {/* <Route path="*" component={NotFound} /> */}
+            <Route path="*" component={NotFound} />
           </Switch>
         </div>
       </Router>

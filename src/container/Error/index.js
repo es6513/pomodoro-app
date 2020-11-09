@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 
 const NotFound = () => (
   <div>
-    <Redirect replace to="/" />
+    <Redirect replace to="/pomodoro-app" />
   </div>
 );
 
