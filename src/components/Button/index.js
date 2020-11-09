@@ -3,7 +3,16 @@ import { PropTypes } from "prop-types";
 
 function Button({ className, children, handleClick, ...restProps }) {
   return (
-    <button className={className} onClick={handleClick} {...restProps}>
+    <button
+      className={className}
+      onClick={handleClick}
+      onKeyDown={(event) => {
+        const key = event.key;
+
+        if (key === " " || key === "Enter") event.preventDefault();
+      }}
+      {...restProps}
+    >
       {children}
     </button>
   );
