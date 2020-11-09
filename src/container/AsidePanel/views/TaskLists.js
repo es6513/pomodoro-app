@@ -148,7 +148,7 @@ function TaskLists() {
   const handleArchive = (id) => {
     const payload = { id, isArchived: true };
     handleUpdateTask(payload);
-    if (filter === "SHOW_UNDONE") {
+    if (filter === "SHOW_UNDONE" && !isCountDown) {
       handleSelectNextTask();
     }
   };
@@ -167,6 +167,7 @@ function TaskLists() {
             }}
             handleSubmit={handleSubmit}
             isCountDown={isCountDown}
+            disableArchive={isCountDown && task.id === currentId}
             handleArchiveLightBox={() => handleOpenLightBox(task.id)}
           />
         );
