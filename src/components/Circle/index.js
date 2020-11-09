@@ -12,6 +12,12 @@ function Circle({ className, dataSize, percentage, ...restProps }) {
 
   const circlePerimeter = Math.round(circleRadius * 2 * 3.1415);
 
+  const handleTimePercentage = (percentage) => {
+    return (percentage * circlePerimeter).toFixed(2);
+  };
+
+  const circleDashValue = handleTimePercentage(percentage);
+
   return (
     <svg width={width} height={width} className={className} {...restProps}>
       <circle
@@ -20,7 +26,7 @@ function Circle({ className, dataSize, percentage, ...restProps }) {
         cy={cy}
         className="circleSector"
         strokeWidth={strokeWidth / 2}
-        strokeDasharray={`${percentage} ${circlePerimeter}`}
+        strokeDasharray={`${circleDashValue} ${circlePerimeter}`}
       />
     </svg>
   );

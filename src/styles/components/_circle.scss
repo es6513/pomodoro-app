@@ -28,22 +28,11 @@ $size-themes:(
       stroke:  #ea5548;
       transition: stroke-dasharray 3s ease;
     }
-    
-
-    // @each $size, $styles in $size-themes{
-    //   &[data-size=#{$size}]{
-    //     width: map-get($styles , width);
-    //     height: map-get($styles , height);
-    //   }
-    // }
-
+  
     &:not(:first-child){
       margin-left: 0.2 * $font-basis;
     }
 
-    // &[data-fill="fill"]{
-    //   background-color: $tomato;
-    // }
   }
 
 }

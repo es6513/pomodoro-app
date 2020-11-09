@@ -15,27 +15,11 @@ function CircleGroup({
   dataSize,
   ...restProps
 }) {
-  //svg
-  let width = dataSize === "small" ? 10 : 20;
-
-  const circleRadius = width / 4;
-  const strokeWidth = width;
-
-  const cx = width / 2 - 1,
-    cy = width / 2 - 1;
-
   //percentage
 
   const { workTime } = task;
-  const circlePerimeter = Math.round(circleRadius * 2 * 3.1415);
 
-  const handleTimePercentage = (time, unitTime) => {
-    return ((time / unitTime) * circlePerimeter).toFixed(2);
-  };
-  const percentage = handleTimePercentage(
-    workTime,
-    timeConstants.oneUnitWorkSeconds
-  );
+  const percentage = workTime / timeConstants.oneUnitWorkSeconds;
   console.log(percentage);
 
   const renderCircle = () => {
@@ -58,7 +42,7 @@ function CircleGroup({
                   key={index}
                   className={`${ROOT_CLASS}__circle`}
                   dataSize={dataSize}
-                  percentage={circlePerimeter}
+                  percentage={1}
                 />
               ) : (
                 estimatedTomatoCircle
@@ -88,7 +72,7 @@ function CircleGroup({
                 key={index}
                 className={`${ROOT_CLASS}__circle`}
                 dataSize={dataSize}
-                percentage={circlePerimeter}
+                percentage={1}
               />
             ))
             .concat([

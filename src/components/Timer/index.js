@@ -23,13 +23,21 @@ function Timer({
 }) {
   const { id, workTime, breakTime, isBreak, finishTomato } = task;
 
-  //handle time appear
+  //handle time percentage
   const circleRadius = 120;
   const circlePerimeter = Math.round(circleRadius * 2 * 3.1415);
 
-  const handleTimePercentage = (time, unitTime) => {
-    return ((time / unitTime) * circlePerimeter).toFixed(2);
+  const percentage = isBreak
+    ? breakTime / timeConstants.oneUnitBreakSeconds
+    : workTime / timeConstants.oneUnitWorkSeconds;
+
+  const handleTimePercentage = (percentage) => {
+    return (percentage * circlePerimeter).toFixed(2);
   };
+
+  const circleDash = handleTimePercentage(percentage);
+
+  //handle Remain time
   const handleRemainTime = (remainTime) => {
     const date = new Date(0);
     date.setSeconds(remainTime);
@@ -40,10 +48,6 @@ function Timer({
   const remainTime = isBreak
     ? handleRemainTime(timeConstants.oneUnitBreakSeconds - breakTime)
     : handleRemainTime(timeConstants.oneUnitWorkSeconds - workTime);
-
-  const percentage = isBreak
-    ? handleTimePercentage(breakTime, timeConstants.oneUnitBreakSeconds)
-    : handleTimePercentage(workTime, timeConstants.oneUnitWorkSeconds);
 
   //handle side effect
   const timeoutId = useRef(null);
@@ -129,7 +133,7 @@ function Timer({
             fill="none"
             stroke={isBreak ? "#acacac" : "#ea5548"}
             strokeWidth="40"
-            strokeDasharray={`${percentage},10000`}
+            strokeDasharray={`${circleDash},10000`}
             transform="rotate(-90,175,150)"
           />
 
