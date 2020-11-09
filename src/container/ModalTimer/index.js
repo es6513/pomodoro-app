@@ -9,6 +9,7 @@ import CircleGroup from "../../components/CircleGroup";
 import { DoneLightBox } from "../../components/LightBox";
 import TomatoColor from "../../assets/icons/tomato_small_color.svg";
 import Complete from "../../assets/icons/complete.svg";
+import useLightBox from "../../hooks/useLightBox";
 
 const { css } = config;
 const { ROOT_CLASS } = css;
@@ -24,15 +25,7 @@ function ModalTimer() {
 
   //LightBox
 
-  const [isLightBoxOpen, setLightBox] = useState(false);
-
-  const handleOpenLightBox = (id) => {
-    setLightBox(true);
-  };
-
-  const handleCloseLightBox = () => {
-    setLightBox(false);
-  };
+  const [isLightBoxOpen, openLightBox, closeLightBox] = useLightBox(false);
 
   //show Task
 
@@ -123,7 +116,7 @@ function ModalTimer() {
           <Button
             type="button"
             disabled={isCountDown}
-            handleClick={handleOpenLightBox}
+            handleClick={openLightBox}
             className={`${ROOT_CLASS}__undone-button`}
           >
             TASK COMPLETE
@@ -157,7 +150,7 @@ function ModalTimer() {
         <DoneLightBox
           className={`${ROOT_CLASS}__light-box`}
           handleDond={() => handleDoneTask(currentId)}
-          handleClose={() => handleCloseLightBox()}
+          handleClose={closeLightBox}
         />
       ) : null}
     </div>
