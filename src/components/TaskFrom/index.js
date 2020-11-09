@@ -57,9 +57,13 @@ function TaskForm({
           className={`${ROOT_CLASS}__form-input`}
           inputName="taskTitle"
           useFormRef={formRegister({
-            required: "This field is required.",
             validate: {
-              trimmedValue: (value) => value.trim().length > 0,
+              trimmedValue: (value) => {
+                if (value.trim().length === 0) {
+                  return "This field is required.";
+                }
+                return true;
+              },
             },
           })}
           errors={formErrors}
@@ -82,7 +86,7 @@ function TaskForm({
           data-radius="general"
           data-layout="full"
           type="submit"
-          disabled={!formIsValid}
+          disabled={buttonDisabled()}
         >
           ADD TASK
         </Button>
@@ -104,7 +108,7 @@ function TaskForm({
             data-color="primary"
             data-radius="general"
             type="submit"
-            disabled={buttonDisabled() || isCountDown}
+            disabled={buttonDisabled() || isCountDown || !formIsValid}
             className={`${ROOT_CLASS}__form-button`}
           >
             SAVE

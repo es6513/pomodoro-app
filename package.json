@@ -2,6 +2,7 @@
   "name": "pomodoro-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://es6513.github.io/pomodoro-app",
   "dependencies": {
     "@hookform/error-message": "^0.0.4",
     "@testing-library/jest-dom": "^5.11.4",
@@ -22,7 +23,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +49,7 @@
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "gh-pages": "^3.1.0",
     "prettier": "^2.1.2"
   }
 }
