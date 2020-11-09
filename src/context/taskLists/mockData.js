@@ -16,7 +16,7 @@ mockInitialState.taskLists = mockInitialState.taskLists.map((el, index) => {
     id: index === 0 ? firstUuid : uuidv4(),
     isArchived: false,
     isDone: false,
-    isBreak: false,
+    isBreak: index === 2 ? true : false,
     taskTitle: "Task" + String(index + 1),
     estimatedTomato: index + 1,
     estimatedWorkTime: (index + 1) * timeConstants.oneUnitWorkSeconds,
