@@ -5,6 +5,7 @@ import MenuItem from "../../components/MenuItem";
 import MenuLink from "../../components/MenuLink";
 import NewTask from "./views/NewTask";
 import TaskLists from "./views/TaskLists";
+import NotFound from "../Error";
 import {
   BrowserRouter as Router,
   Switch,
@@ -79,6 +80,8 @@ function AsidePanel() {
             {slideNavs.map((nav) => (
               <Route key={nav.path} path={nav.path} component={nav.component} />
             ))}
+            <Route component={NotFound} />
+
             <Redirect replace to={slideNavs[0].path} />
           </Switch>
         </div>
