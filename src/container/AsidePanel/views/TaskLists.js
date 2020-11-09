@@ -126,9 +126,8 @@ function TaskLists() {
     }
   };
 
-  const handleSelectTask = (id, spreadIndex) => {
+  const handleSelectTask = (id) => {
     setCurrentTask(id);
-    handleSpread(spreadIndex);
   };
 
   const handleSelectNextTask = () => {
@@ -246,10 +245,11 @@ function TaskLists() {
             key={task.id}
             className={`${ROOT_CLASS}__task-lists__task-item`}
             style={{ marginBottom: "1px" }}
+            onClick={() => handleSelectTask(task.id)}
           >
             <TaskInfo
               className={`${ROOT_CLASS}__task-lists__task-item-info`}
-              handelClick={() => handleSelectTask(task.id, index)}
+              handelClick={() => handleSpread(index)}
               isDone={task.isDone}
               isCurrent={task.id === currentId}
             >
