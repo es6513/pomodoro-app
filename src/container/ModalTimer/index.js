@@ -5,6 +5,8 @@ import actions from "../../context/taskLists/actions";
 import HeadTitle from "../../components/HeadTitle";
 import Timer from "../../components/Timer";
 import Button from "../../components/Button";
+import TomatoColor from "../../assets/icons/tomato_small_color.svg";
+import Complete from "../../assets/icons/complete.svg";
 
 const { css } = config;
 const { ROOT_CLASS } = css;
@@ -27,18 +29,6 @@ function ModalTimer() {
 
   const showedTask = getShowTask();
 
-  //handleUpdateTask
-
-  const { isDone, isBreak, isArchived } = showedTask;
-  const [localTask, setLocalTask] = useState(showedTask);
-
-  useEffect(() => {
-    const undoneTasks = taskLists.filter(
-      (task) => !task.isDone && !task.isArchived
-    );
-    const payload = { id: undoneTasks[0].id };
-    taskDispatch(actions.setCurrentTask(payload));
-  }, [isDone, isArchived]);
   //handleTimerBehavior
 
   const handleCountDown = (isCountDown) => {
@@ -62,41 +52,84 @@ function ModalTimer() {
     taskDispatch(actions.updateTaskState(payload));
   };
 
+  //handleUpdateTask
+
+  const handleSelectNextTask = () => {
+    const undoneTasks = taskLists
+      .filter((task) => !task.isDone && !task.isArchived)
+      .filter((task) => task.id !== currentId);
+    if (undoneTasks.length) {
+      const payload = { id: undoneTasks[0].id };
+      taskDispatch(actions.setCurrentTask(payload));
+    } else {
+      const payload = { id: null };
+      taskDispatch(actions.setCurrentTask(payload));
+    }
+  };
+
   const handleDoneTask = () => {
     const payload = { id: currentId, isDone: true };
     handleUpdateTask(payload);
-    console.log(taskLists);
+    handleSelectNextTask();
+  };
+
+  //handle Render
+
+  const renderContent = (showedTask) => {
+    if (showedTask) {
+      return (
+        <div className={`${ROOT_CLASS}__modal-timer`}>
+          <div className={`${ROOT_CLASS}__modal-timer__content`}>
+            <HeadTitle headTag="h1">{showedTask.taskTitle}</HeadTitle>
+            {showedTask.isBreak ? (
+              <div className={`${ROOT_CLASS}__modal-timer__break-label`}>
+                BREAK
+              </div>
+            ) : null}
+            <Timer
+              task={showedTask}
+              className={`${ROOT_CLASS}__modal-timer__timer`}
+              isCountDown={isCountDown}
+              handleCountDown={handleCountDown}
+              handleBreak={handleBreak}
+              handleWorkTIme={handleWorkTIme}
+              handleBreakTIme={handleBreakTIme}
+              handleUpdateTask={handleUpdateTask}
+            />
+            <div className={`${ROOT_CLASS}__undone-button-group`}>
+              <img alt="complete" src={Complete} />
+              <Button
+                type="button"
+                disabled={isCountDown}
+                handleClick={handleDoneTask}
+              >
+                TASK COMPLETE
+              </Button>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div
+          className={`${ROOT_CLASS}__modal-timer__content ${ROOT_CLASS}__modal-timer__content--empty`}
+        >
+          <div className={`${ROOT_CLASS}__modal-timer__empty-tomato`}>
+            <HeadTitle headTag="h2">PODOMORO</HeadTitle>
+            <img alt="emptyTomato" src={TomatoColor} />
+          </div>
+          <div className={`${ROOT_CLASS}__modal-timer__empty-text`}>
+            You don’t have any task now,
+            <br /> please add task first!
+          </div>
+        </div>
+      );
+    }
   };
 
   return (
     <div className={`${ROOT_CLASS}__modal-timer`}>
-      <div className={`${ROOT_CLASS}__modal-timer__content`}>
-        {showedTask ? (
-          <HeadTitle headTag="h1">{showedTask.taskTitle}</HeadTitle>
-        ) : null}
-        {isBreak ? (
-          <div className={`${ROOT_CLASS}__modal-timer__break-label`}>BREAK</div>
-        ) : null}
-        <Timer
-          task={showedTask}
-          className={`${ROOT_CLASS}__modal-timer__timer`}
-          isCountDown={isCountDown}
-          handleCountDown={handleCountDown}
-          handleBreak={handleBreak}
-          handleWorkTIme={handleWorkTIme}
-          handleBreakTIme={handleBreakTIme}
-          handleUpdateTask={handleUpdateTask}
-        />
-      </div>
-      <Button
-        type="button"
-        className={`${ROOT_CLASS}__undone-button`}
-        disabled={isCountDown}
-        handleClick={handleDoneTask}
-      >
-        TASK COMPLETE
-      </Button>
-
+      {renderContent(showedTask)}
       <footer>POMODORO</footer>
     </div>
   );
