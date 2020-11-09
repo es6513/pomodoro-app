@@ -5,7 +5,7 @@ import actions from "../../../context/taskLists/actions";
 import { config } from "../../../config";
 import HeadTitle from "../../../components/HeadTitle";
 import Button from "../../../components/Button";
-import Circle from "../../../components/Circle";
+import CircleGroup from "../../../components/CircleGroup";
 import TaskFrom from "../../../components/TaskFrom";
 import withAsideLayout from "../../../hoc/withAsideLayout";
 import TaskInfo from "../../../components/TaskInfo";
@@ -233,8 +233,7 @@ function TaskLists() {
               isCurrent={task.id === currentId}
             >
               <HeadTitle headTag="h4">{task.taskTitle}</HeadTitle>
-              <Circle
-                className={`${ROOT_CLASS}__circle`}
+              <CircleGroup
                 data-size="small"
                 estimatedTomato={task.estimatedTomato}
                 finishTomato={task.finishTomato}

@@ -193,11 +193,15 @@ export default Timer;
 
 Timer.propTypes = {
   task: PropTypes.object.isRequired,
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
   isCountDown: PropTypes.bool.isRequired,
   handleCountDown: PropTypes.func.isRequired,
   handleBreak: PropTypes.func.isRequired,
   handleWorkTIme: PropTypes.func.isRequired,
   handleBreakTIme: PropTypes.func.isRequired,
   handleUpdateTask: PropTypes.func.isRequired,
+};
+
+Timer.defaultProps = {
+  className: "",
 };

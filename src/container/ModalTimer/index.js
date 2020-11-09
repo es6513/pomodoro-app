@@ -5,7 +5,7 @@ import actions from "../../context/taskLists/actions";
 import HeadTitle from "../../components/HeadTitle";
 import Timer from "../../components/Timer";
 import Button from "../../components/Button";
-import Circle from "../../components/Circle";
+import CircleGroup from "../../components/CircleGroup";
 import TomatoColor from "../../assets/icons/tomato_small_color.svg";
 import Complete from "../../assets/icons/complete.svg";
 
@@ -87,8 +87,7 @@ function ModalTimer() {
             </div>
           ) : (
             <div className={`${ROOT_CLASS}__modal-timer__circle`}>
-              <Circle
-                className={`${ROOT_CLASS}__circle`}
+              <CircleGroup
                 data-size="big"
                 estimatedTomato={showedTask.estimatedTomato}
                 finishTomato={showedTask.finishTomato}
