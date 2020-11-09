@@ -127,7 +127,7 @@ TaskForm.propTypes = {
   defaultValues: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   handleArchiveLightBox: PropTypes.func,
-  disableArchive: PropTypes.bool.isRequired,
+  disableArchive: PropTypes.bool,
   isCountDown: PropTypes.bool,
   location: PropTypes.object.isRequired,
 };
