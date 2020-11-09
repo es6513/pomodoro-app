@@ -1,8 +1,10 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 const NotFound = () => (
   <div>
+    Not Found
+    <Link to="/">111</Link>
     <Redirect replace to="/pomodoro-app" />
   </div>
 );

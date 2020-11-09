@@ -20,12 +20,12 @@ const { ROOT_CLASS } = css;
 
 const slideNavs = [
   {
-    path: "/pomodoro-app/add",
+    path: "/add",
     iconComponent: Icons.AddWhite,
     component: NewTask,
   },
   {
-    path: "/pomodoro-app/todo",
+    path: "/todo",
     iconComponent: Icons.ListWhite,
     component: TaskLists,
   },
@@ -87,7 +87,7 @@ function AsidePanel() {
             ))}
             <Redirect replace to={slideNavs[0].path} />
 
-            <Route path="*" component={NotFound} />
+            <Route component={NotFound} />
           </Switch>
         </div>
       </Router>
