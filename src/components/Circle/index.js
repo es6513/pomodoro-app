@@ -2,7 +2,7 @@ import React from "react";
 import { PropTypes } from "prop-types";
 
 function Circle({ className, dataSize, percentage, ...restProps }) {
-  let width = dataSize === "small" ? 10 : 20;
+  let width = dataSize === "small" ? 10 : 15;
 
   const circleRadius = width / 4;
   const strokeWidth = width;

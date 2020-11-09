@@ -1,29 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { PropTypes } from "prop-types";
 import HeadTitle from "../HeadTitle";
 import Button from "../Button";
 
 function LightBox({ className, handleConfirm, handleClose }) {
-  const onConfirm = () => {
-    handleConfirm();
-    handleClose();
-  };
-
-  useEffect(() => {
-    window.addEventListener("click", handleClose);
-
-    return () => {
-      window.removeEventListener("click", handleClose);
-    };
-  }, [handleClose]);
   return (
     <div className={className}>
       <div className="light-box-content">
         <div className="light-box-header">
-          <HeadTitle headTag="h3">Archive Task</HeadTitle>
+          <HeadTitle headTag="h3">Hooray!</HeadTitle>
         </div>
         <div className="light-box-body">
-          Are you sure you want to archive this task?
+          You can check this task in done list.
+          <br />
+          Don’t forget to select next task to continue.
         </div>
         <div className="light-box-button-group">
           <Button
@@ -38,9 +28,9 @@ function LightBox({ className, handleConfirm, handleClose }) {
             data-size="big"
             data-color="primary"
             data-radius="general"
-            handleClick={onConfirm}
+            handleClick={handleConfirm}
           >
-            ARCHIVE
+            SELECT NEXT TASK
           </Button>
         </div>
       </div>

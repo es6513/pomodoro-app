@@ -54,6 +54,12 @@ function TaskLists() {
   //LightBox
 
   const [isLightBoxOpen, setLightBox] = useState(false);
+  const [archiveTaskId, setArchiveTaskId] = useState(null);
+
+  const handleOpenLightBox = (id) => {
+    setLightBox(true);
+    setArchiveTaskId(id);
+  };
 
   //handle from
 
@@ -91,7 +97,7 @@ function TaskLists() {
     return taskItemClassName;
   };
 
-  //HandleSelectTask
+  //handleSelectTask
   const setCurrentTask = (id) => {
     if (
       isCountDown ||
@@ -132,6 +138,8 @@ function TaskLists() {
     }
   };
 
+  //handleArchive
+
   const handleArchive = (id) => {
     const payload = { id, isArchived: true };
     handleUpdateTask(payload);
@@ -154,7 +162,7 @@ function TaskLists() {
             }}
             handleSubmit={handleSubmit}
             isCountDown={isCountDown}
-            handleArchive={() => handleArchive(task.id)}
+            handleArchiveLightBox={() => handleOpenLightBox(task.id)}
           />
         );
       case "SHOW_DONE":
@@ -166,7 +174,7 @@ function TaskLists() {
               data-radius="general"
               type="button"
               className={`${ROOT_CLASS}__form-button`}
-              handleClick={() => setLightBox(true)}
+              handleClick={() => handleOpenLightBox(task.id)}
             >
               ARCHIVE
             </Button>
@@ -256,7 +264,7 @@ function TaskLists() {
       {isLightBoxOpen ? (
         <ArchiveLightBox
           className={`${ROOT_CLASS}__light-box`}
-          handleConfirm={() => null}
+          handleConfirm={() => handleArchive(archiveTaskId)}
           handleClose={() => setLightBox(false)}
         />
       ) : null}
