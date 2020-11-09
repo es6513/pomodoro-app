@@ -10,6 +10,7 @@ import CircleGroup from "../../../components/CircleGroup";
 import TaskFrom from "../../../components/TaskFrom";
 import TaskInfo from "../../../components/TaskInfo";
 import { ArchiveLightBox } from "../../../components/LightBox";
+import useLightBox from "../../../hooks/useLightBox";
 
 const { css } = config;
 const { ROOT_CLASS } = css;
@@ -53,16 +54,16 @@ function TaskLists() {
 
   //LightBox
 
-  const [isLightBoxOpen, setLightBox] = useState(false);
   const [archiveTaskId, setArchiveTaskId] = useState(null);
+  const [isLightBoxOpen, openLightBox, closeLightBox] = useLightBox(false);
 
   const handleOpenLightBox = (id) => {
-    setLightBox(true);
+    openLightBox();
     setArchiveTaskId(id);
   };
 
   const handleCloseLightBox = () => {
-    setLightBox(false);
+    closeLightBox();
     setArchiveTaskId(null);
   };
 
