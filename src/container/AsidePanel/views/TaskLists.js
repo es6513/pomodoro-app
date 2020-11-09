@@ -55,12 +55,10 @@ function TaskLists() {
   const handleSubmit = (formData, e, resetForm) => {
     const payload = { id: currentId, ...formData };
     taskDispatch(actions.updateTaskState(payload));
-    console.log("submit");
     resetForm(formData, { isDirty: false });
   };
 
-  const handleUpdateTask = (updateData) => {
-    const payload = { id: currentId, ...updateData };
+  const handleUpdateTask = (payload) => {
     taskDispatch(actions.updateTaskState(payload));
   };
 
@@ -116,6 +114,27 @@ function TaskLists() {
     handleSpread(spreadIndex);
   };
 
+  const handleSelectNextTask = () => {
+    const undoneTasks = taskLists
+      .filter((task) => !task.isDone && !task.isArchived)
+      .filter((task) => task.id !== currentId);
+    if (undoneTasks.length) {
+      const payload = { id: undoneTasks[0].id };
+      taskDispatch(actions.setCurrentTask(payload));
+    } else {
+      const payload = { id: null };
+      taskDispatch(actions.setCurrentTask(payload));
+    }
+  };
+
+  const handleArchive = (id) => {
+    const payload = { id, isArchived: true };
+    handleUpdateTask(payload);
+    if (filter === "SHOW_UNDONE") {
+      handleSelectNextTask();
+    }
+  };
+
   //render content
 
   const renderDetailContent = (task) => {
@@ -130,7 +149,7 @@ function TaskLists() {
             }}
             handleSubmit={handleSubmit}
             isCountDown={isCountDown}
-            handleUpdateTask={handleUpdateTask}
+            handleArchive={() => handleArchive(task.id)}
           />
         );
       case "SHOW_DONE":
@@ -142,9 +161,7 @@ function TaskLists() {
               data-radius="general"
               type="button"
               className={`${ROOT_CLASS}__form-button`}
-              handleClick={() =>
-                handleUpdateTask({ id: task.id, isArchived: true })
-              }
+              handleClick={() => handleArchive(task.id)}
             >
               ARCHIVE
             </Button>
