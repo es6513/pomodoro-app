@@ -78,11 +78,16 @@ function AsidePanel() {
         <div className={`${ROOT_CLASS}__aside-panel__content`}>
           <Switch>
             {slideNavs.map((nav) => (
-              <Route key={nav.path} path={nav.path} component={nav.component} />
+              <Route
+                exact
+                key={nav.path}
+                path={nav.path}
+                component={nav.component}
+              />
             ))}
-            <Route component={NotFound} />
-
             <Redirect replace to={slideNavs[0].path} />
+
+            <Route path="*" component={NotFound} />
           </Switch>
         </div>
       </Router>
