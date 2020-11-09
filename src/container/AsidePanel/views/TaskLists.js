@@ -5,6 +5,7 @@ import actions from "../../../context/taskLists/actions";
 import { config } from "../../../config";
 import HeadTitle from "../../../components/HeadTitle";
 import Button from "../../../components/Button";
+import Clock from "../../../components/Clock";
 import TaskFrom from "../../../components/TaskFrom";
 import withAsideLayout from "../../../hoc/withAsideLayout";
 import TaskInfo from "../../../components/TaskInfo";
@@ -52,8 +53,9 @@ function TaskLists() {
   //handle from
 
   const handleSubmit = (formData, e, resetForm) => {
-    const payload = { ...formData };
-    taskDispatch(actions.updateTaskState(currentId, payload));
+    const payload = { id: currentId, ...formData };
+    taskDispatch(actions.updateTaskState(payload));
+    console.log("submit");
     resetForm(formData, { isDirty: false });
   };
 
@@ -86,6 +88,19 @@ function TaskLists() {
     return taskItemClassName;
   };
 
+  //HandleSelectTask
+  const setCurrentTask = (id) => {
+    if (
+      isCountDown ||
+      filter === "SHOW_DONE" ||
+      filter === "SHOW_ARCHIVE" ||
+      id === currentId
+    )
+      return;
+    const payload = { id };
+    taskDispatch(actions.setCurrentTask(payload));
+  };
+
   const handleSpread = (index) => {
     if (index === spreadId) setIsTaskSpread((prevState) => !prevState);
     else if (index !== spreadId && isTaskSpread) {
@@ -96,12 +111,9 @@ function TaskLists() {
     }
   };
 
-  //HandleSelectTask
-  const handleSelectTask = (id) => {
-    if (isCountDown || filter === "SHOW_DONE" || filter === "SHOW_ARCHIVE")
-      return;
-    const payload = { id };
-    taskDispatch(actions.setCurrentTask(payload));
+  const handleSelectTask = (id, spreadIndex) => {
+    setCurrentTask(id);
+    handleSpread(spreadIndex);
   };
 
   //render content
@@ -196,17 +208,20 @@ function TaskLists() {
             key={task.id}
             className={`${ROOT_CLASS}__task-lists__task-item`}
             style={{ marginBottom: "1px" }}
-            onClick={() => {
-              handleSelectTask(task.id);
-            }}
           >
             <TaskInfo
               className={`${ROOT_CLASS}__task-lists__task-item-info`}
-              handelCLick={() => handleSpread(index)}
+              handelClick={() => handleSelectTask(task.id, index)}
               isDone={task.isDone}
               isCurrent={task.id === currentId}
             >
               <HeadTitle headTag="h4">{task.taskTitle}</HeadTitle>
+              <Clock
+                className={`${ROOT_CLASS}__clock`}
+                data-size="small"
+                estimatedTomato={task.estimatedTomato}
+                finishTomato={task.finishTomato}
+              />
             </TaskInfo>
             <div className={getTaskDetailClassName(index)}>
               <div className={`${ROOT_CLASS}__task-lists__spread-content`}>

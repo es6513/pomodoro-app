@@ -58,7 +58,7 @@ function AsidePanel() {
             <MenuItem
               key={nav.path}
               className={`${ROOT_CLASS}__aside-panel__menu-item`}
-              handelCLick={() =>
+              handelClick={() =>
                 setIsCollapsed((prevCollapsed) =>
                   prevCollapsed ? !prevCollapsed : prevCollapsed
                 )

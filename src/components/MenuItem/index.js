@@ -1,18 +1,18 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 
-function MenuItem({ className, handelCLick, ...restProps }) {
-  return <li className={className} onClick={handelCLick} {...restProps}></li>;
+function MenuItem({ className, handelClick, ...restProps }) {
+  return <li className={className} onClick={handelClick} {...restProps}></li>;
 }
 
 export default MenuItem;
 
 MenuItem.propTypes = {
   className: PropTypes.string,
-  handelCLick: PropTypes.func,
+  handelClick: PropTypes.func,
 };
 
 MenuItem.defaultProps = {
   className: "",
-  handelCLick: () => null,
+  handelClick: () => null,
 };

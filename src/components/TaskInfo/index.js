@@ -4,14 +4,14 @@ import Icons from "../../components/Icon";
 
 function TaskInfo({
   className,
-  handelCLick,
+  handelClick,
   children,
   isDone,
   isCurrent,
   ...resrProps
 }) {
   return (
-    <div className={className} onClick={handelCLick} {...resrProps}>
+    <div className={className} onClick={handelClick} {...resrProps}>
       {children}
       <div
         className={`task-info--prefix task-info--prefix-${
@@ -32,7 +32,7 @@ export default TaskInfo;
 
 TaskInfo.propTypes = {
   className: PropTypes.string,
-  handelCLick: PropTypes.func,
+  handelClick: PropTypes.func,
   children: PropTypes.node.isRequired,
   isDone: PropTypes.bool.isRequired,
   isCurrent: PropTypes.bool.isRequired,
@@ -40,5 +40,5 @@ TaskInfo.propTypes = {
 
 TaskInfo.defaultProps = {
   className: "",
-  handelCLick: () => null,
+  handelClick: () => null,
 };
