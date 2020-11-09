@@ -32,7 +32,7 @@ const getVisibleTask = (taskLists, filter) => {
     case "SHOW_UNDONE":
       return taskLists.filter((task) => !task.isDone && !task.isArchived);
     case "SHOW_DONE":
-      return taskLists.filter((task) => task.isDone);
+      return taskLists.filter((task) => task.isDone && !task.isArchived);
     case "SHOW_ARCHIVE":
       return taskLists.filter((task) => task.isArchived);
     default:
