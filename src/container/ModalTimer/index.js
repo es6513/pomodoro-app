@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { config } from "../../config";
 import { TaskListContext } from "../../context";
 import actions from "../../context/taskLists/actions";
@@ -6,6 +6,7 @@ import HeadTitle from "../../components/HeadTitle";
 import Timer from "../../components/Timer";
 import Button from "../../components/Button";
 import CircleGroup from "../../components/CircleGroup";
+import { DoneLightBox } from "../../components/LightBox";
 import TomatoColor from "../../assets/icons/tomato_small_color.svg";
 import Complete from "../../assets/icons/complete.svg";
 
@@ -20,6 +21,18 @@ function ModalTimer() {
     },
     taskDispatch,
   } = useContext(TaskListContext);
+
+  //LightBox
+
+  const [isLightBoxOpen, setLightBox] = useState(false);
+
+  const handleOpenLightBox = (id) => {
+    setLightBox(true);
+  };
+
+  const handleCloseLightBox = () => {
+    setLightBox(false);
+  };
 
   //show Task
 
@@ -68,7 +81,9 @@ function ModalTimer() {
     }
   };
 
-  const handleDoneTask = () => {
+  //handeDoneTask
+
+  const handleDoneTask = (id) => {
     const payload = { id: currentId, isDone: true };
     handleUpdateTask(payload);
     handleSelectNextTask();
@@ -108,7 +123,7 @@ function ModalTimer() {
           <Button
             type="button"
             disabled={isCountDown}
-            handleClick={handleDoneTask}
+            handleClick={handleOpenLightBox}
             className={`${ROOT_CLASS}__undone-button`}
           >
             TASK COMPLETE
@@ -138,6 +153,13 @@ function ModalTimer() {
     <div className={`${ROOT_CLASS}__modal-timer`}>
       {renderContent(showedTask)}
       <footer>POMODORO</footer>
+      {isLightBoxOpen ? (
+        <DoneLightBox
+          className={`${ROOT_CLASS}__light-box`}
+          handleDond={() => handleDoneTask(currentId)}
+          handleClose={() => handleCloseLightBox()}
+        />
+      ) : null}
     </div>
   );
 }

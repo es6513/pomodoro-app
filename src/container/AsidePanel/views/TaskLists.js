@@ -9,7 +9,7 @@ import Button from "../../../components/Button";
 import CircleGroup from "../../../components/CircleGroup";
 import TaskFrom from "../../../components/TaskFrom";
 import TaskInfo from "../../../components/TaskInfo";
-import ArchiveLightBox from "../../../components/LightBox";
+import { ArchiveLightBox } from "../../../components/LightBox";
 
 const { css } = config;
 const { ROOT_CLASS } = css;
@@ -59,6 +59,11 @@ function TaskLists() {
   const handleOpenLightBox = (id) => {
     setLightBox(true);
     setArchiveTaskId(id);
+  };
+
+  const handleCloseLightBox = () => {
+    setLightBox(false);
+    setArchiveTaskId(null);
   };
 
   //handle from
@@ -264,8 +269,8 @@ function TaskLists() {
       {isLightBoxOpen ? (
         <ArchiveLightBox
           className={`${ROOT_CLASS}__light-box`}
-          handleConfirm={() => handleArchive(archiveTaskId)}
-          handleClose={() => setLightBox(false)}
+          handleArchive={() => handleArchive(archiveTaskId)}
+          handleClose={() => handleCloseLightBox()}
         />
       ) : null}
     </div>

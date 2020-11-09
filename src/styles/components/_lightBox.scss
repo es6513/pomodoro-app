@@ -2,8 +2,8 @@
 $_light-box-component: #{$root-class}__light-box;
 
 
-@keyframes animatetop {
-  from {top:-300px; opacity:0}
+@keyframes slideFromTop {
+  from {top: -100px; opacity:0}
   to {top:0; opacity:1}
 }
 
@@ -38,13 +38,15 @@ $_light-box-component: #{$root-class}__light-box;
     width: 40 * $font-basis;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     border-radius: 0.5 * $font-basis;
-    animation-name: animatetop;
-    animation-duration: 0.4s
+    animation-name: slideFromTop;
+    animation-duration: 0.8s
   }
 
   .light-box-body{
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     padding: 2 * $font-basis;
   }
 

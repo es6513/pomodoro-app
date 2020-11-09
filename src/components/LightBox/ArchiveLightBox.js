@@ -3,9 +3,9 @@ import { PropTypes } from "prop-types";
 import HeadTitle from "../HeadTitle";
 import Button from "../Button";
 
-function DoneLightBox({ className, handleDond, handleClose }) {
+function ArchiveLightBox({ className, handleArchive, handleClose }) {
   const handleConfirm = () => {
-    handleDond();
+    handleArchive();
     handleClose();
   };
 
@@ -20,12 +20,10 @@ function DoneLightBox({ className, handleDond, handleClose }) {
     <div className={className}>
       <div className="light-box-content">
         <div className="light-box-header">
-          <HeadTitle headTag="h3">Hooray!</HeadTitle>
+          <HeadTitle headTag="h3">Archive Task</HeadTitle>
         </div>
         <div className="light-box-body">
-          <p>You can check this task in done list.</p>
-          <br />
-          <p>Don’t forget to select next task to continue.</p>
+          Are you sure you want to archive this task?
         </div>
         <div className="light-box-button-group">
           <Button
@@ -42,7 +40,7 @@ function DoneLightBox({ className, handleDond, handleClose }) {
             data-radius="general"
             handleClick={handleConfirm}
           >
-            SELECT NEXT TASK
+            ARCHIVE
           </Button>
         </div>
       </div>
@@ -50,14 +48,14 @@ function DoneLightBox({ className, handleDond, handleClose }) {
   );
 }
 
-export default DoneLightBox;
+export default ArchiveLightBox;
 
-DoneLightBox.propTypes = {
+ArchiveLightBox.propTypes = {
   className: PropTypes.string,
-  handleDond: PropTypes.func.isRequired,
+  handleArchive: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
 };
 
-DoneLightBox.defaultProps = {
+ArchiveLightBox.defaultProps = {
   className: "",
 };
