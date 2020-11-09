@@ -1,21 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { PropTypes } from "prop-types";
 import HeadTitle from "../HeadTitle";
 import Button from "../Button";
 
-function DoneLightBox({ className, handleDond, handleClose }) {
+function DoneLightBox({ className, handleDone, handleClose }) {
   const handleConfirm = () => {
-    handleDond();
+    handleDone();
     handleClose();
   };
 
-  useEffect(() => {
-    window.addEventListener("click", handleClose);
+  const handleClick = useCallback(
+    (event) => {
+      const target = event.target;
+      const lightBox = document.querySelector(".pomodoro__light-box");
+      if (target === lightBox) handleClose();
+    },
+    [handleClose]
+  );
 
+  useEffect(() => {
+    window.addEventListener("click", handleClick);
     return () => {
-      window.removeEventListener("click", handleClose);
+      window.removeEventListener("click", handleClick);
     };
-  }, [handleClose]);
+  }, [handleClick]);
   return (
     <div className={className}>
       <div className="light-box-content">
@@ -54,7 +62,7 @@ export default DoneLightBox;
 
 DoneLightBox.propTypes = {
   className: PropTypes.string,
-  handleDond: PropTypes.func.isRequired,
+  handleDone: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
 };
 

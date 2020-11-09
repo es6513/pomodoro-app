@@ -149,7 +149,7 @@ function ModalTimer() {
       {isLightBoxOpen ? (
         <DoneLightBox
           className={`${ROOT_CLASS}__light-box`}
-          handleDond={() => handleDoneTask(currentId)}
+          handleDone={() => handleDoneTask(currentId)}
           handleClose={closeLightBox}
         />
       ) : null}

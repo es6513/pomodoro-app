@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { PropTypes } from "prop-types";
 import HeadTitle from "../HeadTitle";
 import Button from "../Button";
@@ -9,13 +9,21 @@ function ArchiveLightBox({ className, handleArchive, handleClose }) {
     handleClose();
   };
 
-  useEffect(() => {
-    window.addEventListener("click", handleClose);
+  const handleClick = useCallback(
+    (event) => {
+      const target = event.target;
+      const lightBox = document.querySelector(".pomodoro__light-box");
+      if (target === lightBox) handleClose();
+    },
+    [handleClose]
+  );
 
+  useEffect(() => {
+    window.addEventListener("click", handleClick);
     return () => {
-      window.removeEventListener("click", handleClose);
+      window.removeEventListener("click", handleClick);
     };
-  }, [handleClose]);
+  }, [handleClick]);
   return (
     <div className={className}>
       <div className="light-box-content">
