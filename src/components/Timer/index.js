@@ -119,6 +119,7 @@ function Timer({
       <div className={`${ROOT_CLASS}__timer`}>
         <svg width="350" height="300">
           <circle
+            className={`${ROOT_CLASS}__timer__under-circle`}
             cx="175"
             cy="150"
             r="120"
@@ -127,6 +128,7 @@ function Timer({
             strokeWidth="40"
           />
           <circle
+            className={`${ROOT_CLASS}__timer__upper-circle`}
             cx="175"
             cy="150"
             r="120"

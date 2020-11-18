@@ -24,6 +24,14 @@ $_modal-timer-component: #{$root-class}__modal-timer;
       font-size: 2*$font-basis;
       font-weight: 800;
     }
+
+
+    &__under-circle{
+      transition: stroke-dasharray 1s ease;
+    }
+    &__upper-circle{
+      transition: stroke-dasharray 1s ease;
+    }
   }
  
   #{$root-class}__button-group{
