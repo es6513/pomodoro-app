@@ -13,7 +13,6 @@ const { ROOT_CLASS } = css;
 function App() {
   return (
     <div className={`${ROOT_CLASS}`}>
-      {"try travis"}
       <TaskListProvider>
         <ModalTimer />
         <AsidePanel />
